@@ -15,19 +15,34 @@
                             ثبت‌نام مجدد با شماره
                             همراه ندارید</div>
                         <div class="account-box-content">
-                            <form class="form-account">
-                                <div class="form-account-title">پست الکترونیک یا شماره موبایل</div>
+                            <form method='post' class="form-account">
+                                {% csrf_token %}
+                                <p> {{ form.errors }} </p>
+                                <div class="form-account-title">پست الکترونیک یا شماره موبایل(فعلا با نام کاربری)</div>
                                 <div class="form-account-row">
                                     <label class="input-label"><i class="now-ui-icons users_single-02"></i></label>
-                                    <input class="input-field" type="text"
+                                    <input name='username' class="input-field" type="text"
+                                        placeholder="نام کاربری">
+                                </div>
+                                <div class="form-account-title">پست الکترونیک</div>
+                                <div class="form-account-row">
+                                    <label class="input-label"><i class="now-ui-icons users_single-02"></i></label>
+                                    <input name='email' class="input-field" type="email"
                                         placeholder="پست الکترونیک یا شماره موبایل خود را وارد نمایید">
                                 </div>
                                 <div class="form-account-title">کلمه عبور</div>
                                 <div class="form-account-row">
                                     <label class="input-label"><i
                                             class="now-ui-icons ui-1_lock-circle-open"></i></label>
-                                    <input class="input-field" type="password"
+                                    <input name='password1' class="input-field" type="password"
                                         placeholder="کلمه عبور خود را وارد نمایید">
+                                </div>
+                                <div class="form-account-title">تکرار کلمه عبور</div>
+                                <div class="form-account-row">
+                                    <label class="input-label"><i
+                                            class="now-ui-icons ui-1_lock-circle-open"></i></label>
+                                    <input name='password2' class="input-field" type="password"
+                                        placeholder="کلمه عبور خود را مجددا وارد نمایید">
                                 </div>
                                 <div class="form-account-agree">
                                     <label class="checkbox-form checkbox-primary">
@@ -51,7 +66,7 @@
                         </div>
                         <div class="account-box-footer">
                             <span>قبلا در دیجی کالا ثبت‌نام کرده‌اید؟</span>
-                            <a href="#" class="btn-link-border">وارد شوید</a>
+                            <a href="{% url 'accounts_app:login' %}" class="btn-link-border">وارد شوید</a>
                         </div>
                     </div>
                 </div>

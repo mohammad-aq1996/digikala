@@ -273,18 +273,36 @@
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="user-login dropdown">
+                    {% if user.is_authenticated %}
+                        <a href="#" class="btn btn-neutral dropdown-toggle" data-toggle="dropdown"
+                           id="navbarDropdownMenuLink1">
+                            {{ user.username }} عزیز، به دیجی کالا خوش آمدید
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                            <div class="dropdown-item">
+                                <a class="btn btn-info" href="{% url 'accounts_app:login' %}">حساب کاربری</a>
+                            </div>
+                            <div class="dropdown-item font-weight-bold">
+                                <span></span> <a class="register" href="{% url 'accounts_app:logout' %}">خروج</a>
+                            </div>
+                        </ul>
+                    {% else %}
+                    
+                    
                         <a href=http://ehsanghasimi.ir/ class="btn btn-neutral dropdown-toggle" data-toggle="dropdown"
                            id="navbarDropdownMenuLink1">
                             ورود / ثبت نام
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
                             <div class="dropdown-item">
-                                <a class="btn btn-info">ورود به دیجی کالا</a>
+                                <a class="btn btn-info" href="{% url 'accounts_app:login' %}">ورود به دیجی کالا</a>
                             </div>
                             <div class="dropdown-item font-weight-bold">
-                                <span>کاربر جدید هستید؟</span> <a class="register" href=http://ehsanghasimi.ir/>ثبت‌نام</a>
+                                <span>کاربر جدید هستید؟</span> <a class="register" href="{% url 'accounts_app:register' %}">ثبت‌نام</a>
                             </div>
                         </ul>
+                    
+                    {% endif %}
                     </div>
                     <div class="cart dropdown">
                         <a href=http://ehsanghasimi.ir/ class="btn dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink1">

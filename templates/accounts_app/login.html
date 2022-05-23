@@ -12,22 +12,26 @@
                         </a>
                         <div class="account-box-title text-right">ورود به دیجی کالا</div>
                         <div class="account-box-content">
-                            <form class="form-account">
+                            <form method='post' class="form-account">
+                                {% csrf_token %}
+                                {{form.errors}}
+                                <p style='color:red'> نام کاربری یا رمز عبور اشتباه است </p>
+                                {% endif %}
                                 <div class="form-account-title">ایمیل یا شماره موبایل</div>
                                 <div class="form-account-row">
                                     <label class="input-label"><i class="now-ui-icons users_single-02"></i></label>
-                                    <input class="input-field" type="text"
+                                    <input name='username' class="input-field" type="text"
                                         placeholder="ایمیل یا شماره موبایل خود را وارد نمایید">
                                 </div>
                                 <div class="form-account-title">رمز عبور
-                                    <a href="" class="btn-link-border form-account-link">رمز
+                                    <a href="mm" class="btn-link-border form-account-link">رمز
                                         عبور خود را فراموش
                                         کرده ام</a>
                                 </div>
                                 <div class="form-account-row">
                                     <label class="input-label"><i
                                             class="now-ui-icons ui-1_lock-circle-open"></i></label>
-                                    <input class="input-field" type="password"
+                                    <input name='password' class="input-field" type="password"
                                         placeholder="رمز عبور خود را وارد نمایید">
                                 </div>
                                 <div class="form-account-row form-account-submit">
@@ -49,7 +53,7 @@
                         </div>
                         <div class="account-box-footer">
                             <span>کاربر جدید هستید؟</span>
-                            <a href="#" class="btn-link-border">ثبت‌نام در
+                            <a href="{% url 'accounts_app:register' %}" class="btn-link-border">ثبت‌نام در
                                 دیجی کالا</a>
                         </div>
                     </div>

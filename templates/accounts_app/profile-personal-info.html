@@ -21,37 +21,61 @@
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">نام و نام خانوادگی :</span>
-                                                <span>جلال بهرامی راد</span>
+                                                <span> {% if user.first_name and user.last_name %}
+                                                    {{ user.first_name }} {{ user.last_name }}
+                                                {% else %}
+                                                    -
+                                                {% endif %} </span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">پست الکترونیک :</span>
-                                                <span>info@gmail.com</span>
+                                                <span>{% if user.email %}
+                                                    {{ user.email }}
+                                                {% else %}
+                                                    -
+                                                {% endif %} </span></span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">شماره تلفن همراه:</span>
-                                                <span>-</span>
+                                                <span>{% if user.phone %}
+                                                    {{ user.phone }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}</span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">کد ملی :</span>
-                                                <span>-</span>
+                                                <span>{% if user.national_code %}
+                                                    {{ user.national_code }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}</span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">دریافت خبرنامه :</span>
-                                                <span>بله</span>
+                                                <span>{% if user.newsletter %}
+                                                    بله
+                                                {% else %}
+                                                    خیر
+                                                {% endif %}</span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">شماره کارت :</span>
-                                                <span>-</span>
+                                                <span>{% if user.card_number %}
+                                                    {{ user.card_number }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}</span>
                                             </p>
                                         </div>
                                         <div class="col-12 text-center">

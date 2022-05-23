@@ -24,3 +24,5 @@ class PassChangeView(PasswordChangeView):
     success_url = reverse_lazy('accounts_app:password_change_done')
 
 
+class ProfilePersonalInfoView(TemplateView):
+    template_name = 'accounts_app/profile-personal-info.html'

@@ -21,37 +21,61 @@
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">نام و نام خانوادگی :</span>
-                                                <span>جلال بهرامی راد</span>
+                                                <span> {% if user.first_name and user.last_name %}
+                                                    {{ user.first_name }} {{ user.last_name }}
+                                                {% else %}
+                                                    -
+                                                {% endif %} </span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">پست الکترونیک :</span>
-                                                <span>info@gmail.com</span>
+                                                <span>{% if user.email %}
+                                                    {{ user.email }}
+                                                {% else %}
+                                                    -
+                                                {% endif %} </span></span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">شماره تلفن همراه:</span>
-                                                <span>-</span>
+                                                <span>{% if user.phone %}
+                                                    {{ user.phone }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}</span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">کد ملی :</span>
-                                                <span>-</span>
+                                                <span>{% if user.national_code %}
+                                                    {{ user.national_code }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}</span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">دریافت خبرنامه :</span>
-                                                <span>بله</span>
+                                                <span>{% if user.newsletter %}
+                                                    بله
+                                                {% else %}
+                                                    خیر
+                                                {% endif %}</span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <p>
                                                 <span class="title">شماره کارت :</span>
-                                                <span>-</span>
+                                                <span>{% if user.card_number %}
+                                                    {{ user.card_number }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}</span>
                                             </p>
                                         </div>
                                         <div class="col-12 text-center">
@@ -71,7 +95,7 @@
                                         <div class="col-12">
                                             <div class="profile-recent-fav-row">
                                                 <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
-                                                    <img src="assets/img/cart/4560621.jpg"></a>
+                                                    <img src="{% static 'img/cart/4560621.jpg' %}"></a>
                                                 <div class="profile-recent-fav-col profile-recent-fav-col-title">
                                                     <a href="#">
                                                         <h4 class="profile-recent-fav-name">
@@ -88,7 +112,7 @@
                                             </div>
                                             <div class="profile-recent-fav-row">
                                                 <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
-                                                    <img src="assets/img/cart/3794614.jpg"></a>
+                                                    <img src="{% static 'img/cart/3794614.jpg' %}"></a>
                                                 <div class="profile-recent-fav-col profile-recent-fav-col-title">
                                                     <a href="#">
                                                         <h4 class="profile-recent-fav-name">
@@ -131,7 +155,7 @@
                         <div class="profile-box">
                             <div class="profile-box-header">
                                 <div class="profile-box-avatar">
-                                    <img src="assets/img/svg/user.svg" alt="">
+                                    <img src="{% static 'img/svg/user.svg' %}" alt="">
                                 </div>
                                 <button data-toggle="modal" data-target="#myModal" class="profile-box-btn-edit">
                                     <i class="fa fa-pencil"></i>
@@ -147,28 +171,28 @@
                                             <div class="modal-body">
                                                 <ul class="profile-avatars default text-center">
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/user.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/user.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-1.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-1.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-2.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-2.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-3.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-3.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-4.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-4.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-5.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-5.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-6.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-6.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-7.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-7.svg' %}"></img>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -177,7 +201,11 @@
                                 </div>
                                 <!-- Modal Core -->
                             </div>
-                            <div class="profile-box-username">بهرامی راد</div>
+                            <div class="profile-box-username">{% if user.last_name %}
+                            {{user.last_name}}
+                            {% else %}
+                            {{user.username}}
+                            {% endif %} </div>
                             <div class="profile-box-tabs">
                                 <a href="{% url 'accounts_app:password_change' %}" class="profile-box-tab profile-box-tab-access">
                                     <i class="now-ui-icons ui-1_lock-circle-open"></i>
@@ -202,19 +230,19 @@
                                     </a>
                                     <a href="profile-orders.html" class="dropdown-item">
                                     <i class="now-ui-icons shopping_basket"></i>
-                                    همه سفارش ها
+                                    همه سفارش هاa
                                     </a>
                                     <a href="profile-orders-return.html" class="dropdown-item">
                                     <i class="now-ui-icons files_single-copy-04"></i>
-                                    درخواست مرجوعی
+                                    درخواست مرجوعیa
                                     </a>
-                                    <a href="profile-favorites.html" class="dropdown-item">
+                                    <a href="tt" class="dropdown-item">
                                     <i class="now-ui-icons ui-2_favourite-28"></i>
-                                    لیست علاقمندی ها
+                                    لیست علاقمندی هاa
                                     </a>
-                                    <a href="profile-personal-info.html" class="dropdown-item">
+                                    <a href="{% url 'accounts_app:personal-info' %}" class="dropdown-item">
                                     <i class="now-ui-icons business_badge"></i>
-                                    اطلاعات شخصی
+                                    اطلاعات تخمی
                                     </a>
                                 </div>
                             </div>
@@ -247,7 +275,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="profile-personal-info.html">
+                                    <a href="{% url 'accounts_app:personal-info' %}">
                                         <i class="now-ui-icons business_badge"></i>
                                         اطلاعات شخصی
                                     </a>

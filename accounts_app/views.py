@@ -1,8 +1,9 @@
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
-
-from .forms import UserCreatForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Users
+from .forms import UserCreatForm, UserPersonalInfoForm
 
 
 class RegisterView(CreateView):
@@ -26,3 +27,11 @@ class PassChangeView(PasswordChangeView):
 
 class ProfilePersonalInfoView(TemplateView):
     template_name = 'accounts_app/profile-personal-info.html'
+
+
+class ProfileEditPersonalInfoView(LoginRequiredMixin, UpdateView):
+    model = Users
+    form_class = UserPersonalInfoForm
+    success_url = reverse_lazy('accounts_app:profile')
+    template_name = 'accounts_app/checkout.html'
+

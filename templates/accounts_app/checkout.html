@@ -11,7 +11,8 @@
                             <img src="assets/img/logo.png" alt="">
                         </a>
                         <div class="account-box-content">
-                            <form class="form-account">
+                            <form method='post' class="form-account">
+                                {% csrf_token %}
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="checkout-title text-right">مشخصات شما</div>
@@ -19,33 +20,37 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-account-title">نام</div>
                                         <div class="form-account-row">
-                                            <input class="input-field text-right" type="text"
-                                                placeholder="نام خود را وارد نمایید">
+                                            <input name="first_name" class="input-field text-right" type="text" 
+                                            {% if user.first_name %} value='{{ user.first_name }}' {% endif %} placeholder="نام خود را وارد نمایید">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-account-title">نام خانوادگی</div>
                                         <div class="form-account-row">
-                                            <input class="input-field text-right" type="text"
-                                                placeholder="نام خانوادگی خود را وارد نمایید">
+                                            <input name="last_name" class="input-field text-right" type="text"
+                                            {% if user.last_name %} value='{{user.last_name}}' {% endif %} placeholder="نام خانوادگی خود را وارد نمایید">
                                         </div>
                                     </div>
+
+                                    
+
                                     <div class="col-12">
                                         <div class="form-account-title">کد ملی</div>
                                         <div class="form-account-row">
-                                            <input class="input-field" type="text"
-                                                placeholder="کد ملی خود را وارد نمایید">
+                                            <input name="national_code" class="input-field" type="text"
+                                            {% if user.national_code %} value='{{ user.national_code }}' {% endif %} placeholder="کد ملی خود را وارد نمایید">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-account-agree">
                                             <label class="checkbox-form checkbox-primary">
-                                                <input type="checkbox" id="agree">
+                                                <input name='newsletter' type="checkbox" id="agree" {% if user.newsletter %} checked {% endif %}>
                                                 <span class="checkbox-check"></span>
                                             </label>
-                                            <label for="agree">تبعه خارجی فاقد کد ملی هستم.</label>
+                                            <label for="agree">مایل به دریافت خبرنامه هستم</label>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -54,30 +59,39 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-account-title">نام و نام خانوادگی تحویل گیرنده</div>
                                         <div class="form-account-row">
-                                            <input class="input-field text-right" type="text"
-                                                placeholder="نام تحویل گیرنده را وارد نمایید">
+                                            <input name="receiver_name" class="input-field text-right" type="text"
+                                            {% if user.receiver_name %} value='{{ user.receiver_name }}' {% endif %} placeholder="نام تحویل گیرنده را وارد نمایید">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-account-title">شماره موبایل</div>
                                         <div class="form-account-row">
-                                            <input class="input-field" type="text"
-                                                placeholder=" شماره موبایل خود را وارد نمایید">
+                                            <input name="phone" class="input-field" type="text"
+                                            {% if user.phone %} value='{{ user.phone }}' {% endif %} placeholder=" شماره موبایل خود را وارد نمایید">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-account-title">آدرس پستی</div>
                                         <div class="form-account-row">
-                                            <textarea class="input-field text-right" rows="5"
-                                                placeholder=" شماره موبایل خود را وارد نمایید"></textarea>
+                                            <textarea name='address' class="input-field text-right" rows="5"
+                                             placeholder=" آدرس خود را وارد نمایید"> {% if user.address %} {{ user.address }} {% endif %} </textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-account-title">کد پستی</div>
                                         <div class="form-account-row">
-                                            <input class="input-field" type="text"
-                                                placeholder=" شماره موبایل خود را وارد نمایید">
+                                            <input name="post_id" class="input-field text-right" type="text"
+                                            {% if user.post_id %} value='{{ user.post_id }}' {% endif %} placeholder=" کد پستی خود را وارد نمایید">
                                         </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-account-title">شماره کارت</div>
+                                        <div class="form-account-row">
+                                            <input name="card_number" class="input-field text-right" type="text"
+                                            {% if user.card_number %} value='{{ user.card_number }}' {% endif %} placeholder=" شماره کارت خود را وارد نمایید">
+                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-sm-6 mx-auto">

@@ -28,6 +28,7 @@ class MobileProduct(models.Model):
     weight = models.CharField(max_length=10, default='225 گرم') 
     chipset = models.CharField(max_length=30, default='Apple A11 Bionic Chipset')    
     chipset_type = models.CharField(max_length=15, default='64 بیت')
+    price = models.CharField(max_length=10, default='12000000')
     review = models.TextField() # ckeditor
     created = models.DateTimeField(auto_now_add=True) # jalali date
     updated = models.DateTimeField(auto_now=True)

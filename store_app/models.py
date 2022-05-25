@@ -57,3 +57,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.status
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    product = models.ForeignKey(MobileProduct, models.CASCADE)

@@ -6,10 +6,22 @@ from .models import Brand, Category, MobileProduct, Comment, Cart
 from .forms import CommentForm
 
 
-class MobileListView(ListView):
+class MobileMixin:
     model = MobileProduct
-    template_name = 'store_app/mobile-list.html'
     context_object_name = 'mobiles'
+
+
+class MobileListView(MobileMixin, ListView):
+    template_name = 'store_app/mobile-list.html'
+
+
+class MobileBrandListView(MobileMixin, ListView):
+    template_name = 'store_app/mobile-brand-list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MobileBrandListView, self).get_context_data(**kwargs)
+        context['mobiles'] = MobileProduct.objects.filter(brand__slug=self.kwargs['brand'])
+        return context
 
 
 class MobileDetailView(DetailView):

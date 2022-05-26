@@ -1,6 +1,10 @@
+from email.policy import default
+from random import choices
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from multiselectfield import MultiSelectField
+
 
 class Brand(models.Model):
     title = models.CharField(max_length=30)
@@ -19,14 +23,33 @@ class Category(models.Model):
 
 
 class MobileProduct(models.Model):
+    STORAGE_CHOICE = (
+        ('16', '16'),
+        ('32', '32'),
+        ('64', '64'),
+        ('128', '128'),
+        ('256', '256'),
+        ('512', '512'),
+    )
+    SIMCARD_CHOICE = (
+        ('1', 'تک سیمکارت'),
+        ('2', 'دو سیمکارت'),
+        ('4', 'چهار سیمکارت'),
+    )
+    NETWORK_CHOICE = (
+        ('2G', '2G'),
+        ('3G', '3G'),
+        ('4G', '4G'),
+        ('5G', '5G'),
+    )
     persian_title = models.CharField(max_length=200)
     english_title = models.CharField(max_length=200)
-    internal_storage = models.CharField(max_length=4, default=256)
+    internal_storage = models.CharField(max_length=4, choices=STORAGE_CHOICE, default='256')
     image = models.ImageField(upload_to='store_app')
-    networks = models.CharField(max_length=10, default='2G,3G,4G')
+    networks = MultiSelectField(choices=NETWORK_CHOICE, default=['2G','3G', '4G'])
     pic_resolution = models.CharField(max_length=3, default='64')
-    simcard_no = models.CharField(max_length=20, default='تک سیمکارت')
-    special_features = models.CharField(max_length=300)
+    simcard_no = models.CharField(max_length=20, choices=SIMCARD_CHOICE, default='2')
+    special_features = models.TextField()
     weight = models.CharField(max_length=4, default='225') 
     chipset = models.CharField(max_length=30, default='Apple A11 Bionic Chipset')    
     chipset_type = models.CharField(max_length=3, default='64')

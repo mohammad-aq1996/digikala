@@ -92,7 +92,7 @@
                         <div class="profile-box">
                             <div class="profile-box-header">
                                 <div class="profile-box-avatar">
-                                    <img src="assets/img/svg/user.svg" alt="">
+                                    <img src="{% static 'img/svg/user.svg' %}" alt="">
                                 </div>
                                 <button data-toggle="modal" data-target="#myModal" class="profile-box-btn-edit">
                                     <i class="fa fa-pencil"></i>
@@ -108,28 +108,28 @@
                                             <div class="modal-body">
                                                 <ul class="profile-avatars default text-center">
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/user.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/user.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-1.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-1.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-2.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-2.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-3.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-3.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-4.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-4.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-5.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-5.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-6.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-6.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-7.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-7.svg' %}"></img>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -138,17 +138,21 @@
                                 </div>
                                 <!-- Modal Core -->
                             </div>
-                            <div class="profile-box-username">بهرامی راد</div>
-                            <div class="profile-box-tabs">
-                                <a href="password-change.html" class="profile-box-tab profile-box-tab-access">
-                                    <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                                    تغییر رمز
-                                </a>
-                                <a href="#" class="profile-box-tab profile-box-tab--sign-out">
-                                    <i class="now-ui-icons media-1_button-power"></i>
-                                    خروج از حساب
-                                </a>
-                            </div>
+                            <div class="profile-box-username">{% if user.last_name %}
+                                {{user.last_name}}
+                                {% else %}
+                                {{user.username}}
+                                {% endif %} </div>
+                                <div class="profile-box-tabs">
+                                    <a href="{% url 'accounts_app:password_change' %}" class="profile-box-tab profile-box-tab-access">
+                                        <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                        تغییر رمز
+                                    </a>
+                                    <a href="{% url 'accounts_app:logout' %}" class="profile-box-tab profile-box-tab--sign-out">
+                                        <i class="now-ui-icons media-1_button-power"></i>
+                                        خروج از حساب
+                                    </a>
+                                </div>
                         </div>
                         <div class="responsive-profile-menu show-md">
                             <div class="btn-group">
@@ -184,31 +188,19 @@
                             <div class="profile-menu-header">حساب کاربری شما</div>
                             <ul class="profile-menu-items">
                                 <li>
-                                    <a href="profile.html">
+                                    <a href="{% url 'accounts_app:profile' %}" >
                                         <i class="now-ui-icons users_single-02"></i>
                                         پروفایل
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="profile-orders.html">
+                                    <a href="{% url 'accounts_app:profile-order' %}">
                                         <i class="now-ui-icons shopping_basket"></i>
                                         همه سفارش ها
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="profile-orders-return.html">
-                                        <i class="now-ui-icons files_single-copy-04"></i>
-                                        درخواست مرجوعی
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="profile-favorites.html">
-                                        <i class="now-ui-icons ui-2_favourite-28"></i>
-                                        لیست علاقمندی ها
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="profile-personal-info.html" class="active">
+                                    <a href="{% url 'accounts_app:personal-info' %}" class="active">
                                         <i class="now-ui-icons business_badge"></i>
                                         اطلاعات شخصی
                                     </a>

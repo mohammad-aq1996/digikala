@@ -1,7 +1,8 @@
-from django.views.generic import CreateView, TemplateView, UpdateView
+from django.views.generic import CreateView, TemplateView, UpdateView, ListView
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from store_app.models import Cart
 from .models import Users
 from .forms import UserCreatForm, UserPersonalInfoForm
 
@@ -35,3 +36,6 @@ class ProfileEditPersonalInfoView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('accounts_app:profile')
     template_name = 'accounts_app/checkout.html'
 
+
+class ProfileOrderListView(TemplateView):
+    template_name = 'accounts_app/profile-orders.html'

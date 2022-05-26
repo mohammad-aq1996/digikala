@@ -86,67 +86,48 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="col-12">
-                                    <h1 class="title-tab-content">لیست آخرین علاقمندی ها</h1>
-                                </div>
-                                <div class="content-section default">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="profile-recent-fav-row">
-                                                <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
-                                                    <img src="{% static 'img/cart/4560621.jpg' %}"></a>
-                                                <div class="profile-recent-fav-col profile-recent-fav-col-title">
-                                                    <a href="#">
-                                                        <h4 class="profile-recent-fav-name">
-                                                            گوشی موبایل اپل مدل iPhone XR دو سیم کارت ظرفیت 256 گیگابایت
-                                                        </h4>
-                                                    </a>
-                                                    <div class="profile-recent-fav-price">ناموجود</div>
-                                                </div>
-                                                <div class="profile-recent-fav-col profile-recent-fav-col-actions">
-                                                    <button class="btn-action btn-action-remove">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="profile-recent-fav-row">
-                                                <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
-                                                    <img src="{% static 'img/cart/3794614.jpg' %}"></a>
-                                                <div class="profile-recent-fav-col profile-recent-fav-col-title">
-                                                    <a href="#">
-                                                        <h4 class="profile-recent-fav-name">
-                                                            گوشی موبایل اپل مدل iPhone XR دو سیم کارت ظرفیت 256 گیگابایت
-                                                        </h4>
-                                                    </a>
-                                                    <div class="profile-recent-fav-price">ناموجود</div>
-                                                </div>
-                                                <div class="profile-recent-fav-col profile-recent-fav-col-actions">
-                                                    <button class="btn-action btn-action-remove">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 text-center">
-                                            <a href="#" class="btn-link-border form-account-link">
-                                                مشاهده و ویرایش لیست مورد علاقه
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                      
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <h1 class="title-tab-content">آخرین سفارش ها</h1>
                             </div>
-                            <div class="col-12 text-center">
-                                <div class="content-section pt-5 pb-5">
-                                    <div class="icon-empty">
-                                        <i class="now-ui-icons travel_info"></i>
+                            <div class="content-section default">
+                                <div class="row">
+                                    {% for cart in carts %}
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="profile-recent-fav-row">
+                                            <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
+                                                <img src="{{ cart.product.image.url }}"></a>
+                                            <div class="profile-recent-fav-col profile-recent-fav-col-title">
+                                                <a href="#">
+                                                    <h4 class="profile-recent-fav-name">
+                                                        {{ cart.product.persian_title }}
+                                                    </h4>
+                                                </a>
+                                                <div class="profile-recent-fav-price">{{ cart.product.price }} تومان</div>
+                                            </div>
+                                            <div class="profile-recent-fav-col profile-recent-fav-col-actions">
+                                                <a href="{% url 'store_app:remove_from_cart' cart.id %}">
+                                                <button class="btn-action btn-action-remove">
+                                                    <i class="fa fa-trash"></i>
+                                                </button></a>
+                                            </div>
+                                            <div class="col-12 text-left mb-3">
+                                                <a href="{{cart.product.get_absolute_url}}" class="view-product">مشاهده محصول</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h1 class="text-empty">موردی برای نمایش وجود ندارد!</h1>
+                                    {% empty %}
+                                    <div class="col-12 text-center">
+                                        <div class="content-section pt-5 pb-5">
+                                            <div class="icon-empty">
+                                                <i class="now-ui-icons travel_info"></i>
+                                            </div>
+                                            <h1 class="text-empty">موردی برای نمایش وجود ندارد!</h1>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -251,27 +232,15 @@
                             <div class="profile-menu-header">حساب کاربری شما</div>
                             <ul class="profile-menu-items">
                                 <li>
-                                    <a href="profile.html" class="active">
+                                    <a href="{% url 'accounts_app:profile' %}" class="active">
                                         <i class="now-ui-icons users_single-02"></i>
                                         پروفایل
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="profile-orders.html">
+                                    <a href="{% url 'accounts_app:profile-order' %}">
                                         <i class="now-ui-icons shopping_basket"></i>
                                         همه سفارش ها
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="profile-orders-return.html">
-                                        <i class="now-ui-icons files_single-copy-04"></i>
-                                        درخواست مرجوعی
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="profile-favorites.html">
-                                        <i class="now-ui-icons ui-2_favourite-28"></i>
-                                        لیست علاقمندی ها
                                     </a>
                                 </li>
                                 <li>

@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_view
-from .views import RegisterView, WelcomeView, ProfileView, PassChangeView, ProfilePersonalInfoView, ProfileEditPersonalInfoView
+from .views import RegisterView, WelcomeView, ProfileView, PassChangeView, ProfilePersonalInfoView, ProfileEditPersonalInfoView, ProfileOrderListView
 
 app_name = 'accounts_app'
 
@@ -16,4 +16,6 @@ urlpatterns = [
         name="password_change_done"),
     path('personal-info/', ProfilePersonalInfoView.as_view(), name='personal-info'),
     path('profile/checkout/<int:pk>/', ProfileEditPersonalInfoView.as_view(), name='edit-profile'),
+    path('profile/order/', ProfileOrderListView.as_view(), name='profile-order'),
+
 ]

@@ -18,72 +18,41 @@
                                 </div>
                                 <div class="content-section default">
                                     <div class="row">
+                                        {% for cart in carts %}
                                         <div class="col-md-6 col-sm-12">
                                             <div class="profile-recent-fav-row">
                                                 <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
-                                                    <img src="assets/img/cart/4560621.jpg"></a>
+                                                    <img src="{{ cart.product.image.url }}"></a>
                                                 <div class="profile-recent-fav-col profile-recent-fav-col-title">
                                                     <a href="#">
                                                         <h4 class="profile-recent-fav-name">
-                                                            گوشی موبایل اپل مدل iPhone XR دو سیم کارت ظرفیت 256 گیگابایت
+                                                            {{ cart.product.persian_title }}
                                                         </h4>
                                                     </a>
-                                                    <div class="profile-recent-fav-price">2550000 هزار تومان</div>
+                                                    <div class="profile-recent-fav-price">{{ cart.product.price }} تومان</div>
                                                 </div>
                                                 <div class="profile-recent-fav-col profile-recent-fav-col-actions">
-                                                    <button class="btn-action btn-action-remove">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
+                                                    <a href="{% url 'store_app:remove_from_cart' cart.id %}">
+                                                        <button class="btn-action btn-action-remove">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </a>
                                                 </div>
                                                 <div class="col-12 text-left mb-3">
-                                                    <a class="view-product">مشاهده محصول</a>
+                                                    <a href="{{cart.product.get_absolute_url}}" class="view-product">مشاهده محصول</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="profile-recent-fav-row">
-                                                <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
-                                                    <img src="assets/img/cart/3794614.jpg"></a>
-                                                <div class="profile-recent-fav-col profile-recent-fav-col-title">
-                                                    <a href="#">
-                                                        <h4 class="profile-recent-fav-name">
-                                                            گوشی موبایل اپل مدل iPhone XR دو سیم کارت ظرفیت 256 گیگابایت
-                                                        </h4>
-                                                    </a>
-                                                    <div class="profile-recent-fav-price">ناموجود</div>
+                                        {% empty %}
+                                        <div class="col-12 text-center">
+                                            <div class="content-section pt-5 pb-5">
+                                                <div class="icon-empty">
+                                                    <i class="now-ui-icons travel_info"></i>
                                                 </div>
-                                                <div class="profile-recent-fav-col profile-recent-fav-col-actions">
-                                                    <button class="btn-action btn-action-remove">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="col-12 text-left mb-3">
-                                                    <a class="view-product">مشاهده محصول</a>
-                                                </div>
+                                                <h1 class="text-empty">موردی برای نمایش وجود ندارد!</h1>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="profile-recent-fav-row">
-                                                <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
-                                                    <img src="assets/img/cart/4560621.jpg"></a>
-                                                <div class="profile-recent-fav-col profile-recent-fav-col-title">
-                                                    <a href="#">
-                                                        <h4 class="profile-recent-fav-name">
-                                                            گوشی موبایل اپل مدل iPhone XR دو سیم کارت ظرفیت 256 گیگابایت
-                                                        </h4>
-                                                    </a>
-                                                    <div class="profile-recent-fav-price">ناموجود</div>
-                                                </div>
-                                                <div class="profile-recent-fav-col profile-recent-fav-col-actions">
-                                                    <button class="btn-action btn-action-remove">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="col-12 text-left mb-3">
-                                                    <a class="view-product">مشاهده محصول</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +62,7 @@
                         <div class="profile-box">
                             <div class="profile-box-header">
                                 <div class="profile-box-avatar">
-                                    <img src="assets/img/svg/user.svg" alt="">
+                                    <img src="{% static 'img/svg/user.svg' %}" alt="">
                                 </div>
                                 <button data-toggle="modal" data-target="#myModal" class="profile-box-btn-edit">
                                     <i class="fa fa-pencil"></i>
@@ -109,28 +78,28 @@
                                             <div class="modal-body">
                                                 <ul class="profile-avatars default text-center">
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/user.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/user.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-1.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-1.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-2.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-2.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-3.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-3.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-4.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-4.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-5.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-5.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-6.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-6.svg' %}"></img>
                                                     </li>
                                                     <li>
-                                                        <img class="profile-avatars-item" src="assets/img/svg/avatar-7.svg"></img>
+                                                        <img class="profile-avatars-item" src="{% static 'img/svg/avatar-7.svg' %}"></img>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -139,17 +108,21 @@
                                 </div>
                                 <!-- Modal Core -->
                             </div>
-                            <div class="profile-box-username">بهرامی راد</div>
-                            <div class="profile-box-tabs">
-                                <a href="password-change.html" class="profile-box-tab profile-box-tab-access">
-                                    <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                                    تغییر رمز
-                                </a>
-                                <a href="#" class="profile-box-tab profile-box-tab--sign-out">
-                                    <i class="now-ui-icons media-1_button-power"></i>
-                                    خروج از حساب
-                                </a>
-                            </div>
+                            <div class="profile-box-username">{% if user.last_name %}
+                                {{user.last_name}}
+                                {% else %}
+                                {{user.username}}
+                                {% endif %} </div>
+                                <div class="profile-box-tabs">
+                                    <a href="{% url 'accounts_app:password_change' %}" class="profile-box-tab profile-box-tab-access">
+                                        <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                        تغییر رمز
+                                    </a>
+                                    <a href="{% url 'accounts_app:logout' %}" class="profile-box-tab profile-box-tab--sign-out">
+                                        <i class="now-ui-icons media-1_button-power"></i>
+                                        خروج از حساب
+                                    </a>
+                                </div>
                         </div>
                         <div class="responsive-profile-menu show-md">
                             <div class="btn-group">
@@ -185,31 +158,19 @@
                             <div class="profile-menu-header">حساب کاربری شما</div>
                             <ul class="profile-menu-items">
                                 <li>
-                                    <a href="profile.html">
+                                    <a href="{% url 'accounts_app:profile' %}">
                                         <i class="now-ui-icons users_single-02"></i>
                                         پروفایل
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="profile-orders.html" class="active">
+                                    <a href="{% url 'accounts_app:profile-order' %}" class="active">
                                         <i class="now-ui-icons shopping_basket"></i>
                                         همه سفارش ها
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="profile-orders-return.html">
-                                        <i class="now-ui-icons files_single-copy-04"></i>
-                                        درخواست مرجوعی
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="profile-favorites.html">
-                                        <i class="now-ui-icons ui-2_favourite-28"></i>
-                                        لیست علاقمندی ها
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="profile-personal-info.html">
+                                    <a href="{% url 'accounts_app:personal-info' %}">
                                         <i class="now-ui-icons business_badge"></i>
                                         اطلاعات شخصی
                                     </a>

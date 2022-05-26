@@ -5,8 +5,8 @@ from django.shortcuts import render
 
 def b(request):
     context = {
-        'carts':Cart.objects.filter(user__username='mamali'),
-        'total_price':sum([int(c.product.price) for c in Cart.objects.filter(user__username='mamali')])
+        'carts':Cart.objects.filter(user__username=request.user.username),
+        'total_price':sum([int(c.product.price) for c in Cart.objects.filter(user__username=request.user.username)])
     }
     return context
 

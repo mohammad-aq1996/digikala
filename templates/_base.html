@@ -362,7 +362,7 @@
                                 جانبی گوشی</a>
                                 <ul class="sub-menu nav">
                                     <li class="list-item">
-                                        <a class="nav-link" href=""/"">کیف و کاور گوشی</a>
+                                        <a class="nav-link" href="/">کیف و کاور گوشی</a>
                                     </li>
                                     <li class="list-item">
                                         <a class="nav-link" href="/">پاور بانک</a>
@@ -378,7 +378,7 @@
                                             class="main-list-item nav-link" href="{% url 'store_app:mobile-list' %}">گوشی موبایل</a>
                                         <ul class="sub-menu nav">
                                             <li class="list-item">
-                                                <a class="nav-link" href="/">آیفون اپل</a>
+                                                <a class="nav-link" href="{% url 'store_app:mobile-brand-list' 'iphone' %}">آیفون اپل</a>
                                             </li>
                                             <li class="list-item">
                                                 <a class="nav-link" href="/">هوآوی</a>
@@ -400,10 +400,10 @@
                                                                                      href="/">موبایل</a>
                                 <ul class="sub-menu nav">
                                     <li class="list-item">
-                                        <a class="nav-link" href="/">Apple</a>
+                                        <a class="nav-link" href="{% url 'store_app:mobile-brand-list' 'iphone' %}">Apple</a>
                                     </li>
                                     <li class="list-item">
-                                        <a class="nav-link" href="/">ASUS</a>
+                                        <a class="nav-link" href="{% url 'store_app:mobile-brand-list' 'xiaomi' %}">Xiaomi</a>
                                     </li>
                                     <li class="list-item">
                                         <a class="nav-link" href="/">HTC</a>

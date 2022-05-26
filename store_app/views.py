@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic import ListView, DetailView, DeleteView, TemplateView
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
@@ -46,6 +46,18 @@ class CartListView(ListView):
         context['totla_price'] = sum([int(c.product.price) for c in Cart.objects.filter(user__username='mamali')])
         context['totla_count'] = Cart.objects.filter(user__username=self.request.user).count()
         return context
+
+
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().__init__(**kwargs)
+        context['carts'] = Cart.objects.filter(user__username='mamali')
+        context['totla_price'] = sum([int(c.product.price) for c in Cart.objects.filter(user__username='mamali')])
+        return context
+
+
 
 
 # class D(DeleteView):

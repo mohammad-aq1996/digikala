@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import MobileListView, MobileDetailView, CartListView, remove_from_cart, MobileBrandListView
+from .views import MobileListView, MobileDetailView, CartListView, remove_from_cart, MobileBrandListView, MobileSearchView
 
 app_name = 'store_app'
 
@@ -9,6 +9,5 @@ urlpatterns = [
     path('mobile/<int:pk>/', MobileDetailView.as_view(), name='mobile-detail'),
     path('cart/', CartListView.as_view(), name='cart'),
     path('d/<int:pk>/', remove_from_cart, name='remove_from_cart'),
-    # path('D/<int:pk>/', D.as_view(), name='D'),
-
+    path('mobile/', MobileSearchView.as_view(), name='mobile-search'),
 ]

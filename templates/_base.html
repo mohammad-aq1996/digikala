@@ -37,9 +37,9 @@
                 <span class="navbar-toggler-bar bar3"></span>
             </button>
             <div class="search-nav default">
-                <form action="">
+                <form method='get' action="">
                     <input type="text" placeholder="جستجو ...">
-                    <button type="submit"><img src="{% static 'img/search.png' %}" alt=""></button>
+                    <button type="submit"><img src="" alt=""></button>
                 </form>
                 <ul>
                     <li><a href="/"><i class="now-ui-icons users_single-02"></i></a></li>
@@ -265,8 +265,8 @@
                 </div>
                 <div class="col-lg-6 col-md-5 col-sm-8 col-7">
                     <div class="search-area default">
-                        <form action="" class="search">
-                            <input type="text" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
+                        <form method='get' action="{% url 'store_app:mobile-search' %}" class="search">
+                            <input type="text" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…" name='q'>
                             <button type="submit"><img src="{% static 'img/search.png' %}" alt=""></button>
                         </form>
                     </div>

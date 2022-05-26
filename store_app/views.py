@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView, DeleteView, TemplateView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 from .models import Brand, Category, MobileProduct, Comment, Cart
 from .forms import CommentForm
 
@@ -70,12 +71,14 @@ class IndexView(TemplateView):
         return context
 
 
+class MobileSearchView(ListView):
+    model = MobileProduct
+    template_name = 'store_app/search.html'
+    context_object_name = 'mobiles'
 
-
-# class D(DeleteView):
-#     model = Cart
-#     template_name = 'store_app/cart.html'
-#     success_url = reverse_lazy('store_app:cart')
+    def get_queryset(self):
+        qry = self.request.GET.get('q')
+        return MobileProduct.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
 
 
 def remove_from_cart(request, pk):

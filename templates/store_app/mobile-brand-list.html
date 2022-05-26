@@ -253,29 +253,25 @@
                                 </div>
                             </div>
 
+                            {% if page_obj.has_other_pages %}
+
                             <div class="pager default text-center">
                                 <ul class="pager-items">
+                                    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                                        <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"  aria-disabled="true">صفحه قبل</a>
+                                      </li>
+                                      {% for page in page_obj.paginator.page_range %}
                                     <li>
-                                        <a class="pager-item is-active" href="#">۱</a>
+                                        <a class="pager-item {% if page_obj.number == page %} is-active {% endif %}" href="?page={{ page }}">{{ page }}</a>
                                     </li>
-                                    <li>
-                                        <a class="pager-item" href="#">۲</a>
-                                    </li>
-                                    <li>
-                                        <a class="pager-item" href="#">۳</a>
-                                    </li>
-                                    <li>
-                                        <a class="pager-item" href="#">۴</a>
-                                    </li>
-                                    <li>
-                                        <a class="pager-item" href="#">۵</a>
-                                    </li>
-                                    <line class="pager-items--partition"></line>
-                                    <li>
-                                        <a class="pager-next"></a>
+                                    {% endfor %}
+                                    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                                        <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">صفحه بعد</a>
                                     </li>
                                 </ul>
                             </div>
+                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>

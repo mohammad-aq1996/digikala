@@ -14,10 +14,12 @@ class MobileMixin:
 
 class MobileListView(MobileMixin, ListView):
     template_name = 'store_app/mobile-list.html'
+    paginate_by = 1
 
 
 class MobileBrandListView(MobileMixin, ListView):
     template_name = 'store_app/mobile-brand-list.html'
+    paginate_by = 1
 
     def get_context_data(self, **kwargs):
         context = super(MobileBrandListView, self).get_context_data(**kwargs)
@@ -75,6 +77,7 @@ class MobileSearchView(ListView):
     model = MobileProduct
     template_name = 'store_app/search.html'
     context_object_name = 'mobiles'
+    paginate_by = 1
 
     def get_queryset(self):
         qry = self.request.GET.get('q')

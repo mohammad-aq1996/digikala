@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from multiselectfield import MultiSelectField
+from ckeditor.fields import RichTextField
 
 
 class Brand(models.Model):
@@ -54,7 +55,7 @@ class MobileProduct(models.Model):
     chipset = models.CharField(max_length=30, default='Apple A11 Bionic Chipset')    
     chipset_type = models.CharField(max_length=3, default='64')
     price = models.CharField(max_length=10, default='12000000')
-    review = models.TextField() # ckeditor
+    review = RichTextField()
     created = models.DateTimeField(auto_now_add=True) # jalali date
     updated = models.DateTimeField(auto_now=True)
     brand = models.ForeignKey(Brand, models.CASCADE, related_name='mobiles')

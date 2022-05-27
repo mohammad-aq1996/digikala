@@ -79,6 +79,11 @@ class MobileSearchView(ListView):
     context_object_name = 'mobiles'
     paginate_by = 1
 
+    def querystring(self):
+        qs = self.request.GET.copy()
+        qs.pop(self.page_kwarg, None)
+        return qs.urlencode()
+
     def get_queryset(self):
         qry = self.request.GET.get('q')
         return MobileProduct.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))

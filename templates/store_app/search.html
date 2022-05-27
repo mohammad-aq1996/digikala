@@ -258,15 +258,15 @@
                             <div class="pager default text-center">
                                 <ul class="pager-items">
                                     <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
-                                        <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"  aria-disabled="true">صفحه قبل</a>
+                                        <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}&{{ view.querystring }}{% endif %}"  aria-disabled="true">صفحه قبل</a>
                                       </li>
                                       {% for page in page_obj.paginator.page_range %}
                                     <li>
-                                        <a class="pager-item {% if page_obj.number == page %} is-active {% endif %}" href="?page={{ page }}">{{ page }}</a>
+                                        <a class="pager-item {% if page_obj.number == page %} is-active {% endif %}" href="?page={{ page }}&{{ view.querystring }}">{{ page }}</a>
                                     </li>
                                     {% endfor %}
                                     <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-                                        <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">صفحه بعد</a>
+                                        <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}&{{ view.querystring }}{% endif %}">صفحه بعد</a>
                                     </li>
                                 </ul>
                             </div>

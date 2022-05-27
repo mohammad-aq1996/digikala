@@ -1,6 +1,9 @@
 {% extends '_base.html' %}
 {% load static %}
 {% load humanize %}
+{% load jalali_tags %}
+
+
 {% block title %} Digikala {% endblock %}
 
 {% block content %}
@@ -274,7 +277,7 @@
                                                                         <span class="says">گفت:</span> </div>
 
                                                                     <div class="commentmetadata"><a href="#">
-                                                                          {{ comment.created }}</a> </div>
+                                                                          {{ comment.created|to_jalali:'%y/%m/%d _ %H:%M:%S' }}</a> </div>
 
                                                                     <p>{{ comment.message }}</p>
                                                                 </div>

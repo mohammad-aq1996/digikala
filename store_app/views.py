@@ -21,10 +21,8 @@ class MobileBrandListView(MobileMixin, ListView):
     template_name = 'store_app/mobile-brand-list.html'
     paginate_by = 1
 
-    def get_context_data(self, **kwargs):
-        context = super(MobileBrandListView, self).get_context_data(**kwargs)
-        context['mobiles'] = MobileProduct.objects.filter(brand__slug=self.kwargs['brand'])
-        return context
+    def get_queryset(self):
+        return MobileProduct.objects.filter(brand__slug=self.kwargs['brand'])
 
 
 class MobileDetailView(DetailView):

@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block title %} Digikala {% endblock %}
 
 {% block content %}
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="price-product defualt">
                                         <div class="price-value">
-                                            <span> {{ mobile.price }} </span>
+                                            <span> {{ mobile.price|intcomma }} </span>
                                             <span class="price-currency">تومان</span>
                                         </div>
                                         <div class="price-discount" data-title="تخفیف">
@@ -103,14 +103,17 @@
                                             <span>%</span>
                                         </div>
                                     </div>
+                                    <form method='post'>
+                                        {% csrf_token %}
                                     <div class="product-add default">
                                         <div class="parent-btn">
-                                            <a href="#" class="dk-btn dk-btn-info">
+                                            <button type="submit" class="dk-btn dk-btn-info">
                                                 افزودن به سبد خرید
                                                 <i class="now-ui-icons shopping_cart-simple"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
+                                </form>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 center-breakpoint">
                                     

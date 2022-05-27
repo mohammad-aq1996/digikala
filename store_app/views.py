@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, DeleteView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
@@ -36,14 +36,20 @@ class MobileDetailView(DetailView):
         return context
 
     def post(self, request, **kwargs):
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            message = form.cleaned_data['message']
-            product = MobileProduct.objects.get(pk=self.kwargs['pk'])
-            comment = Comment(user=user, message=message, product=product)
-            comment.save()
-        return redirect('store_app:mobile-detail', self.kwargs['pk'])
+        if 'message' in request.POST:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                user = request.user
+                message = form.cleaned_data['message']
+                product = MobileProduct.objects.get(pk=self.kwargs['pk'])
+                comment = Comment(user=user, message=message, product=product)
+                comment.save()
+            return redirect('store_app:mobile-detail', self.kwargs['pk'])
+        else:
+            product = MobileProduct.objects.get(id=self.kwargs['pk'])
+            cart = Cart(product=product, user=request.user)
+            cart.save()
+            return redirect('store_app:cart')
 
 
 class CartListView(ListView):
@@ -85,6 +91,10 @@ class MobileSearchView(ListView):
     def get_queryset(self):
         qry = self.request.GET.get('q')
         return MobileProduct.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
+
+
+class AddToCartView(CreateView):
+    model = ''
 
 
 def remove_from_cart(request, pk):

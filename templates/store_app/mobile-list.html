@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
-{% load sorting_tags %}
+{% load humanize %}
 
 {% block title %} Digikala {% endblock %}
 
@@ -232,7 +232,7 @@
                                                             <div class="price">
                                                                 <div class="price-value">
                                                                     <div class="price-value-wrapper">
-                                                                        {{ mobile.price }} <span
+                                                                        {{ mobile.price|intcomma }} <span
                                                                             class="price-currency">تومان</span>
                                                                     </div>
                                                                 </div>

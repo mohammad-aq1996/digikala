@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html lang="fa">
 
 <head>
@@ -313,7 +314,7 @@
                             <div class="basket-header">
                                 <div class="basket-total">
                                     <span>مبلغ کل خرید:</span>
-                                    <span>{{total_price}}</span>
+                                    <span>{{total_price|intcomma}}</span>
                                     <span> تومان</span>
                                 </div>
                                 <a href="/" class="basket-link">

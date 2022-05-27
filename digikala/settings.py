@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'webstack_django_sorting',
+    'django.contrib.humanize',
 
     'accounts_app.apps.AccountsAppConfig',
     'store_app.apps.StoreAppConfig',

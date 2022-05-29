@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'accounts_app.apps.AccountsAppConfig',
     'store_app.apps.StoreAppConfig',
     'payment_app.apps.PaymentAppConfig',
+
+    'django_filters',
+
 ]
 
 

@@ -5,7 +5,6 @@
 {% block title %} Digikala {% endblock %}
 
 {% block content %}
-
         <!-- main -->
         <main class="search-page default">
             <div class="container">
@@ -175,11 +174,11 @@
                                 <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist"
                                     data-label="مرتب‌سازی بر اساس :">
                                     <li>
-                                        <a class="active" data-toggle="tab" href="#related" role="tab"
+                                        <a href='' class="active" data-toggle="tab" href="#related" role="tab"
                                             aria-expanded="false">مرتبط‌ترین</a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#most-view" role="tab"
+                                        <a href="tt" data-toggle="tab" href="#most-view" role="tab"
                                             aria-expanded="false">پربازدیدترین</a>
                                     </li>
                                     <li>
@@ -199,6 +198,11 @@
                                     </li>
                                 </ul>
                             </div>
+
+                            <form method="get">
+                                {{ fltr.form }}
+                                    <button type="submit">Click</button>
+                            </form>
 
                             <div class="tab-content default text-center">
                                 <div class="tab-pane active" id="related" role="tabpanel" aria-expanded="true">

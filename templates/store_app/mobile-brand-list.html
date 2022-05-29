@@ -199,6 +199,11 @@
                                     </li>
                                 </ul>
                             </div>
+                            
+                            <form method='get'>
+                                {{fltr.form}}
+                                <button type='submit'>click</button>
+                            </form>
 
                             <div class="tab-content default text-center">
                                 <div class="tab-pane active" id="related" role="tabpanel" aria-expanded="true">
@@ -206,7 +211,7 @@
                                         <ul class="row listing-items">
 
 
-                                        {% for mobile in mobiles %}
+                                        {% for mobile in filter %}
                                             
                                             <li class="col-xl-3 col-lg-4 col-md-6 col-12 no-padding">
                                                 <div class="product-box">
@@ -259,15 +264,15 @@
                             <div class="pager default text-center">
                                 <ul class="pager-items">
                                     <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
-                                        <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"  aria-disabled="true">صفحه قبل</a>
+                                        <a class="page-link" href="{% if page_obj.has_previous %}?{% if ordr.ordering == 'desc' %}ordering=desc&{% endif %}page={{ page_obj.previous_page_number }}{% endif %}"  aria-disabled="true">صفحه قبل</a>
                                       </li>
                                       {% for page in page_obj.paginator.page_range %}
                                     <li>
-                                        <a class="pager-item {% if page_obj.number == page %} is-active {% endif %}" href="?page={{ page }}">{{ page }}</a>
+                                        <a class="pager-item {% if page_obj.number == page %} is-active {% endif %}" href="?{% if ordr.ordering == 'desc' %}ordering=desc&{% endif %}page={{ page }}">{{ page }}</a>
                                     </li>
                                     {% endfor %}
                                     <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-                                        <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">صفحه بعد</a>
+                                        <a class="page-link" href="{% if page_obj.has_next %}?{% if ordr.ordering == 'desc' %}ordering=desc&{% endif %}page={{ page_obj.next_page_number }}{% endif %}">صفحه بعد</a>
                                     </li>
                                 </ul>
                             </div>

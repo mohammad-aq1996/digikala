@@ -174,35 +174,25 @@
                                 <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist"
                                     data-label="مرتب‌سازی بر اساس :">
                                     <li>
-                                        <a href='' class="active" data-toggle="tab" href="#related" role="tab"
-                                            aria-expanded="false">مرتبط‌ترین</a>
+                                        <a href="{% url 'store_app:mobile-search' %}?q={{qr}}"
+                                        {% if not ordr.ordering %} class="active" {% endif %}>مرتبط‌ترین</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="{% url 'store_app:mobile-search' %}?q={{qr}}&ordering=desc" 
+                                        {% if ordr.ordering == 'desc' %}class="active" {% endif %}>جدیدترین</a>
+                                    </li>
+                                   
+                                    <li>
+                                        <a href="{% url 'store_app:mobile-search' %}?q={{qr}}&ordering=price-l2h" 
+                                            {% if ordr.ordering == 'price-l2h' %} class="active" {% endif %}>ارزان‌ترین</a>
                                     </li>
                                     <li>
-                                        <a href="tt" data-toggle="tab" href="#most-view" role="tab"
-                                            aria-expanded="false">پربازدیدترین</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#new" role="tab" aria-expanded="true">جدیدترین</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#most-seller" role="tab"
-                                            aria-expanded="false">پرفروش‌ترین‌</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#down-price" role="tab"
-                                            aria-expanded="false">ارزان‌ترین</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#top-price" role="tab"
-                                            aria-expanded="false">گران‌ترین</a>
+                                        <a href="{% url 'store_app:mobile-search' %}?q={{qr}}&ordering=price-h2l" role="tab"
+                                            {% if ordr.ordering == 'price-h2l' %} class="active" {% endif %} aria-expanded="false">گران‌ترین</a>
                                     </li>
                                 </ul>
                             </div>
-
-                            <form method="get">
-                                {{ fltr.form }}
-                                    <button type="submit">Click</button>
-                            </form>
 
                             <div class="tab-content default text-center">
                                 <div class="tab-pane active" id="related" role="tabpanel" aria-expanded="true">

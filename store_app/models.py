@@ -61,6 +61,9 @@ class MobileProduct(models.Model):
     brand = models.ForeignKey(Brand, models.CASCADE, related_name='mobiles')
     category = models.ForeignKey(Category, models.CASCADE, related_name='mobiles')
 
+    class Meta:
+        ordering = ['created']
+
     def __str__(self):
         return self.persian_title
 

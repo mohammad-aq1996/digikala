@@ -5,18 +5,6 @@ from .models import MobileProduct
 
 
 class MobileFilter(django_filters.FilterSet):
-    # class Meta:
-    #     model = MobileProduct
-        # fields = ['networks', 'available']
-        # filter_overrides = {
-        #     models.BooleanField: {
-        #         'filter_class': django_filters.BooleanFilter,
-        #         'extra': lambda f: {
-        #             'widget': forms.CheckboxInput,
-        #         },
-        #     },
-        # }
-
     CHOICES = (
         ("desc", "نزولی"),
         ("price-h2l", "قیمت نزولی"),
@@ -24,9 +12,9 @@ class MobileFilter(django_filters.FilterSet):
     )
     ordering = django_filters.ChoiceFilter(label="Ordering", choices=CHOICES, method="filter_by_order")
 
-    price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt')
-    price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt')
-    ava = django_filters.BooleanFilter(label='available', method='xx')
+    price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gte')
+    price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lte')
+    ava = django_filters.BooleanFilter(label='available', method='filter_by_available', widget=forms.CheckboxInput)
 
     def filter_by_order(self, queryset, name, value):
         if value == 'desc':
@@ -37,7 +25,7 @@ class MobileFilter(django_filters.FilterSet):
             expression = 'price'
         return queryset.order_by(expression)
 
-    def xx(self, queryset, name, value):
+    def filter_by_available(self, queryset, name, value):
         if value == True:
             return queryset.filter(**{'available':True})
         else:

@@ -1,3 +1,4 @@
+from secrets import choice
 from django.db import models 
 from django import forms
 import django_filters
@@ -10,11 +11,19 @@ class MobileFilter(django_filters.FilterSet):
         ("price-h2l", "قیمت نزولی"),
         ("price-l2h", "قیمت صعودی"),
     )
+    BRAND_CHOICES = (
+        ("1", "apple"),
+        ("2", "samsung"),
+        ("3", "xiaomi"),
+    )
     ordering = django_filters.ChoiceFilter(label="Ordering", choices=CHOICES, method="filter_by_order")
 
     price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gte')
     price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lte')
+    
     ava = django_filters.BooleanFilter(label='available', method='filter_by_available', widget=forms.CheckboxInput)
+
+    brand = django_filters.MultipleChoiceFilter(label='brand' ,choices=BRAND_CHOICES)
 
     def filter_by_order(self, queryset, name, value):
         if value == 'desc':

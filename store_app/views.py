@@ -20,7 +20,13 @@ class MobileListView(ListView):
     context_object_name = 'filter'
     paginate_by = 1
 
+    def querystring(self):
+        qs = self.request.GET.copy()
+        qs.pop(self.page_kwarg, None)
+        return qs.urlencode()
+
     def get_queryset(self):
+        qry = self.request.GET.get('q')
         qs = MobileProduct.objects.all()
         return MobileFilter(self.request.GET, queryset=qs).qs
 
@@ -34,8 +40,12 @@ class MobileBrandListView(ListView):
     template_name = 'store_app/mobile-brand-list.html'
     model = MobileProduct
     context_object_name = 'filter'
-
     paginate_by = 1
+
+    def querystring(self):
+        qs = self.request.GET.copy()
+        qs.pop(self.page_kwarg, None)
+        return qs.urlencode()
 
     def get_queryset(self):
         qs = MobileProduct.objects.filter(brand__slug=self.kwargs['brand'])
@@ -45,6 +55,7 @@ class MobileBrandListView(ListView):
         context = super().get_context_data(**kwargs)
         context['fltr'] = MobileFilter(self.request.GET, queryset=self.get_queryset())
         context['ordr'] = self.request.GET
+        context['brand'] = self.kwargs['brand']
         return context
 
 

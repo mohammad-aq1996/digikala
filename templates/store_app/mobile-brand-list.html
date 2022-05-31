@@ -175,35 +175,25 @@
                                 <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist"
                                     data-label="مرتب‌سازی بر اساس :">
                                     <li>
-                                        <a class="active" data-toggle="tab" href="#related" role="tab"
-                                            aria-expanded="false">مرتبط‌ترین</a>
+                                        <a href="{% url 'store_app:mobile-brand-list' brand %}"
+                                        {% if not ordr.ordering %} class="active" {% endif %}>مرتبط‌ترین</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=desc" 
+                                        {% if ordr.ordering == 'desc' %}class="active" {% endif %}>جدیدترین</a>
+                                    </li>
+                                   
+                                    <li>
+                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=price-l2h" 
+                                            {% if ordr.ordering == 'price-l2h' %} class="active" {% endif %}>ارزان‌ترین</a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#most-view" role="tab"
-                                            aria-expanded="false">پربازدیدترین</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#new" role="tab" aria-expanded="true">جدیدترین</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#most-seller" role="tab"
-                                            aria-expanded="false">پرفروش‌ترین‌</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#down-price" role="tab"
-                                            aria-expanded="false">ارزان‌ترین</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#top-price" role="tab"
-                                            aria-expanded="false">گران‌ترین</a>
+                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=price-h2l" role="tab"
+                                            {% if ordr.ordering == 'price-h2l' %} class="active" {% endif %} aria-expanded="false">گران‌ترین</a>
                                     </li>
                                 </ul>
                             </div>
-                            
-                            <form method='get'>
-                                {{fltr.form}}
-                                <button type='submit'>click</button>
-                            </form>
 
                             <div class="tab-content default text-center">
                                 <div class="tab-pane active" id="related" role="tabpanel" aria-expanded="true">
@@ -264,15 +254,15 @@
                             <div class="pager default text-center">
                                 <ul class="pager-items">
                                     <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
-                                        <a class="page-link" href="{% if page_obj.has_previous %}?{% if ordr.ordering == 'desc' %}ordering=desc&{% endif %}page={{ page_obj.previous_page_number }}{% endif %}"  aria-disabled="true">صفحه قبل</a>
+                                        <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}&{{ view.querystring }}{% endif %}"  aria-disabled="true">صفحه قبل</a>
                                       </li>
                                       {% for page in page_obj.paginator.page_range %}
                                     <li>
-                                        <a class="pager-item {% if page_obj.number == page %} is-active {% endif %}" href="?{% if ordr.ordering == 'desc' %}ordering=desc&{% endif %}page={{ page }}">{{ page }}</a>
+                                        <a class="pager-item {% if page_obj.number == page %} is-active {% endif %}" href="?page={{ page }}&{{ view.querystring }}">{{ page }}</a>
                                     </li>
                                     {% endfor %}
                                     <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-                                        <a class="page-link" href="{% if page_obj.has_next %}?{% if ordr.ordering == 'desc' %}ordering=desc&{% endif %}page={{ page_obj.next_page_number }}{% endif %}">صفحه بعد</a>
+                                        <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}&{{ view.querystring }}{% endif %}">صفحه بعد</a>
                                     </li>
                                 </ul>
                             </div>

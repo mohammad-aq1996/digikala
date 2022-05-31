@@ -60,6 +60,8 @@ class MobileProduct(models.Model):
     updated = models.DateTimeField(auto_now=True)
     brand = models.ForeignKey(Brand, models.CASCADE, related_name='mobiles')
     category = models.ForeignKey(Category, models.CASCADE, related_name='mobiles')
+    mobile_count = models.PositiveSmallIntegerField(default=2)
+    available = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['created']

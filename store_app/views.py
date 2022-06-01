@@ -9,11 +9,6 @@ from .forms import CommentForm
 from .filters import MobileFilter
 
 
-class MobileMixin:
-    model = MobileProduct
-    context_object_name = 'mobiles'
-
-
 class MobileListView(ListView):
     model = MobileProduct
     template_name = 'store_app/mobile-list.html'
@@ -26,7 +21,6 @@ class MobileListView(ListView):
         return qs.urlencode()
 
     def get_queryset(self):
-        qry = self.request.GET.get('q')
         qs = MobileProduct.objects.all()
         return MobileFilter(self.request.GET, queryset=qs).qs
 
@@ -34,6 +28,8 @@ class MobileListView(ListView):
         context = super(MobileListView, self).get_context_data(**kwargs)
         context['fltr'] = MobileFilter(self.request.GET, queryset=MobileProduct.objects.all())
         context['ordr'] = self.request.GET
+        context['min_price'] = min([mobile.price for mobile in self.model.objects.all()])
+        context['max_price'] = max([mobile.price for mobile in self.model.objects.all()])
         return context
 
 class MobileBrandListView(ListView):
@@ -121,8 +117,6 @@ class MobileSearchView(ListView):
     def querystring(self):
         qs = self.request.GET.copy()
         qs.pop(self.page_kwarg, None)
-        print(self.page_kwarg)
-
         return qs.urlencode()
 
     def get_queryset(self):

@@ -15,9 +15,15 @@
                             ثبت‌نام مجدد با شماره
                             همراه ندارید</div>
                         <div class="account-box-content">
+                            
                             <form method='post' class="form-account">
                                 {% csrf_token %}
-                                <p> {{ form.errors }} </p>
+                                {% if form.errors %}
+                                    {% for f in form %}
+                                        <p> {{ f.errors }} </p>
+                                {% endfor %}
+
+                                {% endif %}
                                 <div class="form-account-title">پست الکترونیک یا شماره موبایل(فعلا با نام کاربری)</div>
                                 <div class="form-account-row">
                                     <label class="input-label"><i class="now-ui-icons users_single-02"></i></label>
@@ -49,10 +55,7 @@
                                         <input type="checkbox" checked="checked">
                                         <span class="checkbox-check"></span>
                                     </label>
-                                    <label for="agree">
-                                        <a href="#" class="btn-link-border">حریم خصوصی</a> و <a href="#"
-                                            class="btn-link-border">شرایط و قوانین</a> استفاده از سرویس های سایت
-                                        دیجی کالا را مطالعه نموده و با کلیه موارد آن موافقم.</label>
+                                    
                                 </div>
                                 <div class="form-account-row form-account-submit">
                                     <div class="parent-btn">

@@ -1,12 +1,11 @@
 {% extends '_base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block header %}
     Digikala
 {% endblock header %}
 
 {% block content %}
-
     <main class="main default">
         <div class="container">
             <!-- banner -->
@@ -365,101 +364,28 @@
                                     <h3 class="card-title">
                                         <span> تلفن همراه  </span>
                                     </h3>
-                                    <a href="/" class="view-all">مشاهده همه</a>
+                                    <a href="{% url 'store_app:mobile-list' %}" class="view-all">مشاهده همه</a>
                                 </header>
                                 <div class="product-carousel owl-carousel owl-theme">
+                                    {% for mobile in mobiles %}
                                     <div class="item">
-                                        <a href="/">
-                                            <img src="{% static 'img/product-slider/60eb20-200x200.jpg' %}"
+                                        <a href="{{ mobile.get_absolute_url }}"> 
+                                            <img src="{{ mobile.image.url }}"
                                                  class="img-fluid" alt="">
                                         </a>
                                         <h2 class="post-title">
-                                            <a href="/">لپ تاپ ۱۱٫۶ اینچی دل مدل INSPIRON 3168 -AC B</a>
+                                            <a href="/">{{ mobile.persian_title }}</a>
                                         </h2>
                                         <div class="price">
                                             <div class="text-center">
-                                                <del><span>4,299,000<span>تومان</span></span></del>
-                                            </div>
-                                            <div class="text-center">
-                                                <ins><span>4,180,000<span>تومان</span></span></ins>
+                                                <ins><span>{{ mobile.price|intcomma }}<span>تومان</span></span></ins>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <a href="/">
-                                            <img src="{% static 'img/product-slider/4ff777-200x200.jpg' %}"
-                                                 class="img-fluid" alt="">
-                                        </a>
-                                        <h2 class="post-title">
-                                            <a href="/">لپ تاپ ۱۴ اینچی دل مدل vostro 5471</a>
-                                        </h2>
-                                        <div class="price">
-                                            <del><span>6,890,000<span>تومان</span></span></del>
-                                            <ins><span>6,580,000<span>تومان</span></span></ins>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <a href="/">
-                                            <img src="{% static 'img/product-slider/35a2b8-200x200.jpg' %}"
-                                                 class="img-fluid" alt="">
-                                        </a>
-                                        <h2 class="post-title">
-                                            <a href="/">لپ تاپ ۱۵ اینچی دل مدل Latitude 5580</a>
-                                        </h2>
-                                        <div class="price">
-                                            <del><span>4,799,000<span>تومان</span></span></del>
-                                            <ins><span>4,699,000<span>تومان</span></span></ins>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <a href="/">
-                                            <img src="{% static 'img/product-slider/9b3da9-200x200.jpg' %}"
-                                                 class="img-fluid" alt="">
-                                        </a>
-                                        <h2 class="post-title">
-                                            <a href="/">لپ تاپ ۱۵ اینچی دل مدل INSPIRON 15-3567 - I</a>
-                                        </h2>
-                                        <div class="price">
-                                            <span>2,780,000<span>تومان</span></span>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <a href="/">
-                                            <img src="{% static 'img/product-slider/c8297f-200x200.jpg' %}"
-                                                 class="img-fluid" alt="">
-                                        </a>
-                                        <h2 class="post-title">
-                                            <a href="/">لپ تاپ ۱۵ اینچی دل مدل INSPIRON 7577 - D</a>
-                                        </h2>
-                                        <div class="price">
-                                            <del><span>8,999,000<span>تومان</span></span></del>
-                                            <ins><span>8,899,000<span>تومان</span></span></ins>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <a href="/">
-                                            <img src="{% static 'img/product-slider/a579bb-200x200.jpg' %}"
-                                                 class="img-fluid" alt="">
-                                        </a>
-                                        <h2 class="post-title">
-                                            <a href="/">لپ تاپ ۱۵ اینچی دل مدل Inspiron 15-5570 - B</a>
-                                        </h2>
-                                        <div class="price">
-                                            <span>4,279,000<span>تومان</span></span>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <a href="/">
-                                            <img src="{% static 'img/product-slider/19a2cc-200x200.jpg' %}"
-                                                 class="img-fluid" alt="">
-                                        </a>
-                                        <h2 class="post-title">
-                                            <a href="/">لپ تاپ ۱۵ اینچی دل مدل XPS 15-9560</a>
-                                        </h2>
-                                        <div class="price">
-                                            <span>18,450,000<span>تومان</span></span>
-                                        </div>
-                                    </div>
+
+
+                                    {% endfor %}
+                                    
                                 </div>
                             </div>
                         </div>
@@ -493,7 +419,7 @@
                                     <h3 class="card-title">
                                         <span>کامپیوتر و لوازم جانبی</span>
                                     </h3>
-                                    <a href="/" class="view-all">مشاهده همه</a>
+                                    <a href="{% url 'store_app:mobile-list' %}" class="view-all">مشاهده همه</a>
                                 </header>
                                 <div class="product-carousel owl-carousel owl-theme">
                                     <div class="item">

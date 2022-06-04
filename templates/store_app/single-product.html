@@ -56,11 +56,11 @@
                                         <ul>
                                             <li>
                                                 <span>برند</span> :
-                                                <span class="product-brand-title">متفرقه</span>
+                                                <span class="product-brand-title">{{ mobile.brand.title }}</span>
                                             </li>
                                             <li>
                                                 <span>دسته‌بندی</span> :
-                                                <a href="#" class="btn-link-border">
+                                                <a href="{% url 'store_app:mobile-list' %}" class="btn-link-border">
                                                     {{ mobile.category.title }}
                                                 </a>
                                             </li>
@@ -195,7 +195,7 @@
                                                 <article>
                                                     <h2 class="param-title">
                                                         مشخصات فنی
-                                                        <span>Apple iPhone X 256GB Mobile Phone</span>
+                                                        <span>{{ mobile.english_title }}</span>
                                                     </h2>
                                                     <section>
                                                         <h3 class="params-title">مشخصات کلی</h3>
@@ -228,6 +228,26 @@
                                                                 <div class="params-list-value">
                                                                     <span class="block">
                                                                         {{ mobile.simcard_no }}
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="params-list-key">
+                                                                    <span class="block">تراشه</span>
+                                                                </div>
+                                                                <div class="params-list-value">
+                                                                    <span class="block">
+                                                                        {{ mobile.chipset }}
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="params-list-key">
+                                                                    <span class="block">نوع پردازنده</span>
+                                                                </div>
+                                                                <div class="params-list-value">
+                                                                    <span class="block">
+                                                                        {{ mobile.chipset_type }} بیت
                                                                     </span>
                                                                 </div>
                                                             </li>

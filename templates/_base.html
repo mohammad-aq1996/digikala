@@ -307,18 +307,21 @@
                     {% endif %}
                     </div>
                     <div class="cart dropdown">
+
                         <a href="/" class="btn dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink1">
                             <i class="now-ui-icons shopping_cart-simple"></i>
                             سبد خرید
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                            {% if user.is_authenticated %}
+
                             <div class="basket-header">
                                 <div class="basket-total">
                                     <span>مبلغ کل خرید:</span>
                                     <span>{{total_price|intcomma}}</span>
                                     <span> تومان</span>
                                 </div>
-                                <a href="/" class="basket-link">
+                                <a href="{% url 'store_app:cart' %}" class="basket-link">
                                     <span>مشاهده سبد خرید</span>
                                     <div class="basket-arrow"></div>
                                 </a>
@@ -326,14 +329,13 @@
                             <ul class="basket-list">
                                 {% for cart in carts %}
                                 <li>
-                                    <a href="/" class="basket-item">
                                         {% comment %} <button href="{% url 'store_app:remove_from_cart' cart.id %}" class="basket-item-remove"></button> {% endcomment %}
                                         <div class="basket-item-content">
                                             <div class="basket-item-image">
                                                 <img alt="" src="{{ cart.product.image.url}}">
                                             </div>
                                             <div class="basket-item-details">
-                                                <div class="basket-item-title">{{ cart.persian_title}}
+                                                <div class="basket-item-title">{{ cart.product.persian_title|slice:":29"}}
                                                 </div>
                                                 <div class="basket-item-params">
                                                     <div class="basket-item-props">
@@ -342,11 +344,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
                                 </li>
                                 {% endfor %}
                             </ul>
-                            <a href="/" class="basket-submit">ورود و ثبت سفارش</a>
+                            <a href="{% url 'payment_app:shopping' %}" class="basket-submit">ثبت سفارش</a>
+                            {% else %}
+                            <a href="{% url 'accounts_app:login' %}" class="basket-submit">ابتدا وارد شوید</a>
+                        {% endif %}
                         </ul>
                     </div>
                 </div>

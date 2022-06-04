@@ -1,12 +1,13 @@
-from sqlite3 import connect
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Brand, Category, MobileProduct, Comment, Cart
 from .forms import CommentForm
 from .filters import MobileFilter
+
 
 
 class MobileListView(ListView):
@@ -32,6 +33,7 @@ class MobileListView(ListView):
         context['max_price'] = max([mobile.price for mobile in self.model.objects.all()])
         return context
 
+
 class MobileBrandListView(ListView):
     template_name = 'store_app/mobile-brand-list.html'
     model = MobileProduct
@@ -52,6 +54,31 @@ class MobileBrandListView(ListView):
         context['fltr'] = MobileFilter(self.request.GET, queryset=self.get_queryset())
         context['ordr'] = self.request.GET
         context['brand'] = self.kwargs['brand']
+        return context
+
+
+class MobileSearchView(ListView):
+    model = MobileProduct
+    template_name = 'store_app/search.html'
+    context_object_name = 'mobiles'
+    paginate_by = 1
+
+    def querystring(self):
+        qs = self.request.GET.copy()
+        qs.pop(self.page_kwarg, None)
+        return qs.urlencode()
+
+    def get_queryset(self):
+        qry = self.request.GET.get('q')
+        qs = MobileProduct.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
+        return MobileFilter(self.request.GET, queryset=qs).qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['fltr'] = MobileFilter(self.request.GET, queryset=self.get_queryset())
+        context['ordr'] = self.request.GET
+        context['qr'] = self.request.GET.get("q")
+        
         return context
 
 
@@ -82,7 +109,7 @@ class MobileDetailView(DetailView):
             return redirect('store_app:cart')
 
 
-class CartListView(ListView):
+class CartListView(LoginRequiredMixin, ListView):
     model = Cart
     template_name = 'store_app/cart.html'
     context_object_name = 'carts'
@@ -92,7 +119,6 @@ class CartListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(f'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa{context}')
         context['totla_price'] = sum([int(c.product.price) for c in Cart.objects.filter(user__username='mamali')])
         context['totla_count'] = Cart.objects.filter(user__username=self.request.user).count()
         return context
@@ -102,35 +128,10 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
-        context = super().__init__(**kwargs)
-        context['carts'] = Cart.objects.filter(user__username='mamali')
-        context['totla_price'] = sum([int(c.product.price) for c in Cart.objects.filter(user__username='mamali')])
-        return context
-
-
-class MobileSearchView(ListView):
-    model = MobileProduct
-    template_name = 'store_app/search.html'
-    context_object_name = 'mobiles'
-    paginate_by = 1
-
-    def querystring(self):
-        qs = self.request.GET.copy()
-        qs.pop(self.page_kwarg, None)
-        return qs.urlencode()
-
-    def get_queryset(self):
-        qry = self.request.GET.get('q')
-        qs = MobileProduct.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
-        return MobileFilter(self.request.GET, queryset=qs).qs
-
-    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['fltr'] = MobileFilter(self.request.GET, queryset=self.get_queryset())
-        context['ordr'] = self.request.GET
-        context['qr'] = self.request.GET.get("q")
-        
+        context['mobiles'] = MobileProduct.objects.all()[:7]
         return context
+
 
 
 def remove_from_cart(request, pk):

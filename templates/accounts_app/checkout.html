@@ -13,6 +13,12 @@
                         <div class="account-box-content">
                             <form method='post' class="form-account">
                                 {% csrf_token %}
+                                {% if form.errors %}
+                                    {% for f in form %}
+                                        <p>{{f.errors}}</p>
+                                    {% endfor %}
+                                    {% comment %} {{form.errors}} {% endcomment %}
+                                {% endif %}
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="checkout-title text-right">مشخصات شما</div>

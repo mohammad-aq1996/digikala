@@ -15,7 +15,6 @@
                             <form method='post' class="form-account">
                                 {% csrf_token %}
                                 {% if form.errors %}
-                                {{form.errors}}
                                 <p style='color:red'> نام کاربری یا رمز عبور اشتباه است </p>
                                 {% endif %}
                                 <div class="form-account-title">ایمیل یا شماره موبایل</div>

@@ -429,24 +429,15 @@
                                 </ul>
                             </li>
                             <li class="list-item list-item-has-children">
-                                <i class="now-ui-icons arrows-1_minimal-left"></i><a class="nav-link" href="/">تبلت
-                                و کتابخوان</a>
+                                <i class="now-ui-icons arrows-1_minimal-left"></i><a class="nav-link" href="{% url 'store_app:laptop-list' %}">لپ تاپ</a>
                                 <ul class="sub-menu nav">
                                     <li class="list-item">
-                                        <a class="nav-link" href="/">Acer</a>
+                                        <a class="nav-link" href="{% url 'store_app:laptop-brand-list' 'apple' %}">Apple</a>
                                     </li>
                                     <li class="list-item">
-                                        <a class="nav-link" href="/">Amazon</a>
+                                        <a class="nav-link" href="{% url 'store_app:laptop-brand-list' 'asus' %}">Asus</a>
                                     </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">Apple</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">ASUS</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">HTC</a>
-                                    </li>
+                                    
                                     <li class="list-item">
                                         <a class="nav-link" href="/">Samsung</a>
                                     </li>

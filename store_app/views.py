@@ -4,9 +4,9 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Brand, Category, MobileProduct, Comment, Cart
+from .models import Brand, Category, MobileProduct, Comment, Cart, LaptopProduct, LaptopComment
 from .forms import CommentForm
-from .filters import MobileFilter
+from .filters import MobileFilter, LpatopFilter
 
 
 
@@ -34,6 +34,30 @@ class MobileListView(ListView):
         return context
 
 
+class LaptopListView(ListView):
+    model = LaptopProduct
+    template_name = 'store_app/laptop-list.html'
+    context_object_name = 'filter'
+    paginate_by = 1
+
+    def querystring(self):
+        qs = self.request.GET.copy()
+        qs.pop(self.page_kwarg, None)
+        return qs.urlencode()
+
+    def get_queryset(self):
+        qs = self.model.objects.all()
+        return LpatopFilter(self.request.GET, queryset=qs).qs
+
+    def get_context_data(self, **kwargs):
+        context = super(LaptopListView, self).get_context_data(**kwargs)
+        context['fltr'] = LpatopFilter(self.request.GET, queryset=self.model.objects.all())
+        context['ordr'] = self.request.GET
+        context['min_price'] = min([int(laptop.price) for laptop in LaptopProduct.objects.all()])
+        context['max_price'] = max([int(laptop.price) for laptop in LaptopProduct.objects.all()])
+        return context
+
+
 class MobileBrandListView(ListView):
     template_name = 'store_app/mobile-brand-list.html'
     model = MobileProduct
@@ -56,6 +80,28 @@ class MobileBrandListView(ListView):
         context['brand'] = self.kwargs['brand']
         return context
 
+
+class LaptopBrandListView(ListView):
+    template_name = 'store_app/laptop-brand-list.html'
+    model = LaptopProduct
+    context_object_name = 'filter'
+    paginate_by = 1
+
+    def querystring(self):
+        qs = self.request.GET.copy()
+        qs.pop(self.page_kwarg, None)
+        return qs.urlencode()
+
+    def get_queryset(self):
+        qs = self.model.objects.filter(brand__slug=self.kwargs['brand'])
+        return LpatopFilter(self.request.GET, queryset=qs).qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['fltr'] = LpatopFilter(self.request.GET, queryset=self.get_queryset())
+        context['ordr'] = self.request.GET
+        context['brand'] = self.kwargs['brand']
+        return context
 
 class MobileSearchView(ListView):
     model = MobileProduct
@@ -104,6 +150,33 @@ class MobileDetailView(DetailView):
             return redirect('store_app:mobile-detail', self.kwargs['pk'])
         else:
             product = MobileProduct.objects.get(id=self.kwargs['pk'])
+            cart = Cart(product=product, user=request.user)
+            cart.save()
+            return redirect('store_app:cart')
+
+
+class LaptopDetailView(DetailView):
+    model = LaptopProduct
+    template_name = 'store_app/laptop-detail.html'
+    context_object_name = 'laptop'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = LaptopComment.objects.filter(status='p', product=LaptopProduct.objects.get(pk=self.kwargs['pk']))
+        return context
+
+    def post(self, request, **kwargs):
+        if 'message' in request.POST:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                user = request.user
+                message = form.cleaned_data['message']
+                product = self.model.objects.get(pk=self.kwargs['pk'])
+                comment = LaptopComment(user=user, message=message, product=product)
+                comment.save()
+            return redirect('store_app:laptop-detail', self.kwargs['pk'])
+        else:
+            product = self.model.objects.get(id=self.kwargs['pk'])
             cart = Cart(product=product, user=request.user)
             cart.save()
             return redirect('store_app:cart')

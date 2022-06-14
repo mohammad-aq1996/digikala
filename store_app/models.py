@@ -54,7 +54,7 @@ class MobileProduct(models.Model):
     weight = models.CharField(max_length=4, default='225') 
     chipset = models.CharField(max_length=30, default='Apple A11 Bionic Chipset')    
     chipset_type = models.CharField(max_length=3, default='64')
-    price = models.CharField(max_length=10, default='12000000')
+    price = models.PositiveIntegerField(default=12000000)
     review = RichTextField()
     created = models.DateTimeField(auto_now_add=True) # jalali date
     updated = models.DateTimeField(auto_now=True)
@@ -67,7 +67,7 @@ class MobileProduct(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return self.persian_title
+        return self.english_title
 
     def get_absolute_url(self):
         return reverse('store_app:mobile-detail', kwargs={'pk': self.id})
@@ -106,7 +106,7 @@ class LaptopProduct(models.Model):
     proccessor_builder = models.CharField(max_length=10, default='intel')
     graphic_proccessor_builder = models.CharField(max_length=10, default='NVIDIA')
     # lprice = models.CharField(max_length=10, default='20000000')
-    price = models.PositiveIntegerField(default='20000000')
+    price = models.PositiveIntegerField(default=20000000)
     review = RichTextField()
     created = models.DateTimeField(auto_now_add=True) # jalali date
     updated = models.DateTimeField(auto_now=True)
@@ -119,7 +119,7 @@ class LaptopProduct(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return self.persian_title
+        return self.english_title
 
     def get_absolute_url(self):
         return reverse('store_app:laptop-detail', kwargs={'pk': self.id})

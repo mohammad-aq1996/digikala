@@ -3,6 +3,10 @@ from django import forms
 import django_filters
 
 
+class SearchX(django_filters.FilterSet):
+    pass
+
+
 class ProductFilter(django_filters.FilterSet):
     CHOICES = (
         ("desc", "نزولی"),

@@ -6,6 +6,7 @@
 
 {% block content %}
         <!-- main -->
+            
              <main class="search-page default">
             <div class="container">
                 <div class="row">
@@ -25,10 +26,10 @@
                                         <div style="text-align:center;" class="filter-option">
                                             
                                             <p><label>از</label>
-                                            <input type='number' name='price__gt' min={{min_price}} max={{max_price}} value={{min_price}}
+                                            <input type='number' name='price_gt' min={{min_price}} max={{max_price}} value={{min_price}}
                                                 style="text-align:center;width: 50%;padding: 6px 10px;margin: 8px 0;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;"> تومان </p>
                                             <p><label >تا</label>
-                                            <input type='number' name='price__lt' min={{min_price}} max={{max_price}} value={{max_price}}
+                                            <input type='number' name='price_lt' min={{min_price}} max={{max_price}} value={{max_price}}
                                                 style="text-align:center;width: 50%;padding: 6px 10px;margin: 8px 0;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;"> تومان </p>
 
                                         </div>
@@ -49,27 +50,27 @@
                                         <div class="filter-option">
                                             
                                             <div class="checkbox">
-                                                <input name="brand" value=1 id="checkbox8" type="checkbox" {% if 'brand=1' in request.get_full_path %}checked{% endif %}>
+                                                <input name="brand" value=apple id="checkbox8" type="checkbox" {% if 'brand=apple' in request.get_full_path %}checked{% endif %}>
                                                 <label for="checkbox8">
                                                     اپل
                                                 </label>
                                             </div>
                                             <div class="checkbox">
-                                                <input id="checkbox9" type="checkbox" {% if 'brand=2' in request.get_full_path %}checked{% endif %}>
+                                                <input name="brand" value=samsung id="checkbox9" type="checkbox" {% if 'brand=samsung' in request.get_full_path %}checked{% endif %}>
                                                 <label for="checkbox9">
                                                     سامسونگ
                                                 </label>
                                             </div>
                                             <div class="checkbox">
-                                                <input name="brand" value=3 id="checkbox10" type="checkbox" {% if 'brand=3' in request.get_full_path %}checked{% endif %}>
+                                                <input name="brand" value=xiaomi id="checkbox10" type="checkbox" {% if 'brand=xiaomi' in request.get_full_path %}checked{% endif %}>
                                                 <label for="checkbox10">
                                                     شیاپومی
                                                 </label>
                                             </div>
                                             <div class="checkbox">
-                                                <input id="checkbox11" type="checkbox">
+                                                <input name="brand" value=asus  id="checkbox11" type="checkbox" {% if 'brand=asus' in request.get_full_path %}checked{% endif %}>
                                                 <label for="checkbox11">
-                                                    نوکیا
+                                                    ایسوس
                                                 </label>
                                             </div>
                                             <div class="checkbox">

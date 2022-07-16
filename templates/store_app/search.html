@@ -1,12 +1,12 @@
 {% extends '_base.html' %}
 {% load static %}
 {% load humanize %}
+{% load order %}
 
 {% block title %} Digikala {% endblock %}
 
 {% block content %}
         <!-- main -->
-            
              <main class="search-page default">
             <div class="container">
                 <div class="row">
@@ -130,21 +130,21 @@
                                 <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist"
                                     data-label="مرتب‌سازی بر اساس :">
                                     <li>
-                                        <a href="{% url 'store_app:mobile-search' %}?q={{qr}}&{{ view.querystring }}"
+                                        <a href="{% url 'store_app:mobile-search' %}?{% if q not in view.querystring %}q={{qr}}&{% endif %}{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}"
                                         {% if not ordr.ordering %} class="active" {% endif %}>مرتبط‌ترین</a>
                                     </li>
                                     
                                     <li>
-                                        <a href="{% url 'store_app:mobile-search' %}?q={{qr}}&ordering=desc&{{ view.querystring }}" 
+                                        <a href="{% url 'store_app:mobile-search' %}?{% if q not in view.querystring %}q={{qr}}&{% endif %}ordering=desc&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
                                         {% if ordr.ordering == 'desc' %}class="active" {% endif %}>جدیدترین</a>
                                     </li>
                                    
                                     <li>
-                                        <a href="{% url 'store_app:mobile-search' %}?q={{qr}}&ordering=price-l2h&{{ view.querystring }}" 
+                                        <a href="{% url 'store_app:mobile-search' %}?{% if q not in view.querystring %}q={{qr}}&{% endif %}ordering=price-l2h&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
                                             {% if ordr.ordering == 'price-l2h' %} class="active" {% endif %}>ارزان‌ترین</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'store_app:mobile-search' %}?q={{qr}}&ordering=price-h2l&{{ view.querystring }}" role="tab"
+                                        <a href="{% url 'store_app:mobile-search' %}?{% if q not in view.querystring %}q={{qr}}&{% endif %}ordering=price-h2l&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" role="tab"
                                             {% if ordr.ordering == 'price-h2l' %} class="active" {% endif %} aria-expanded="false">گران‌ترین</a>
                                     </li>
                                 </ul>

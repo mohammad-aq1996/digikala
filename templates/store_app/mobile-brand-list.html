@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
 {% load humanize %}
+{% load order %}
 
 {% block title %} Digikala {% endblock %}
 
@@ -70,21 +71,21 @@
                                 <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist"
                                     data-label="مرتب‌سازی بر اساس :">
                                     <li>
-                                        <a href="{% url 'store_app:mobile-brand-list' brand %}"
+                                        <a href="{% url 'store_app:mobile-brand-list' brand %}{%if view.querystring %}?{% endif %}{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}"
                                         {% if not ordr.ordering %} class="active" {% endif %}>مرتبط‌ترین</a>
                                     </li>
                                     
                                     <li>
-                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=desc" 
+                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=desc&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
                                         {% if ordr.ordering == 'desc' %}class="active" {% endif %}>جدیدترین</a>
                                     </li>
                                    
                                     <li>
-                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=price-l2h" 
+                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=price-l2h&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
                                             {% if ordr.ordering == 'price-l2h' %} class="active" {% endif %}>ارزان‌ترین</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=price-h2l" role="tab"
+                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=price-h2l&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" role="tab"
                                             {% if ordr.ordering == 'price-h2l' %} class="active" {% endif %} aria-expanded="false">گران‌ترین</a>
                                     </li>
                                 </ul>

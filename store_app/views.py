@@ -97,8 +97,13 @@ class MobileDetailView(DetailView):
             return redirect('store_app:mobile-detail', self.kwargs['pk'])
         else:
             product = MobileProduct.objects.get(id=self.kwargs['pk'])
-            cart = Cart(product=product, user=request.user)
-            cart.save()
+            if Cart.objects.filter(product=product, user=request.user).exists():
+                cart = Cart.objects.get(product=product, user=request.user)
+                cart.quantity = cart.quantity + 1
+                cart.save()
+            else:
+                Cart.objects.create(product=product, user=request.user)
+
             return redirect('store_app:cart')
 
 

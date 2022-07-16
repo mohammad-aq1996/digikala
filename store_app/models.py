@@ -157,3 +157,4 @@ class LaptopComment(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     product = models.ForeignKey(MobileProduct, models.CASCADE)
+    quantity = models.PositiveSmallIntegerField(default=1)

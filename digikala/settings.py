@@ -76,6 +76,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'store_app.context_processors.b',
             ],
+            'libraries':{
+                'order': 'templatetags.order',
+
+            }
         },
     },
 ]

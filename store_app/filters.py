@@ -14,7 +14,7 @@ class ProductFilter(django_filters.FilterSet):
         ("price-l2h", "قیمت صعودی"),
     )
     BRAND_CHOICES = (
-        ("1", "apple"),
+        ("5", "apple"),
         ("2", "samsung"),
         ("3", "xiaomi"),
         ("4", "apple"),

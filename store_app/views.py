@@ -39,6 +39,7 @@ class ProductMixin:
 class MobileListView(ProductMixin, ListView):
     model = MobileProduct
     template_name = 'store_app/mobile-list.html'
+    paginate_by = 10
 
 
 class LaptopListView(ProductMixin, ListView):
@@ -72,46 +73,6 @@ class LaptopBrandListView(ProductMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['brand'] = self.kwargs['brand']
         return context
-
-
-# class MobileSearchView(ProductMixin, ListView):
-#     model = MobileProduct
-#     template_name = 'store_app/search.html'
-#     context_object_name = 'mobiles'
-
-#     def get_queryset(self):
-#         qry = self.request.GET.get('q')
-#         s1 = MobileProduct.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
-#         s2 = LaptopProduct.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
-
-#         qs = list(chain(s1, s2))
-#         print(qs)
-
-#         return ProductFilter(self.request.GET, queryset=qs).qs
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['qr'] = self.request.GET.get("q")
-#         return context
-
-
-# class LaptopSearchView(ProductMixin, ListView):
-#     model = MobileProduct
-#     template_name = 'store_app/search.html'
-#     context_object_name = 'mobiles'
-
-
-#     def get_queryset(self):
-#         qry = self.request.GET.get('q')
-#         qs = MobileProduct.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
-#         return ProductFilter(self.request.GET, queryset=qs).qs
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['qr'] = self.request.GET.get("q")
-#         return context
-
-
 
 
 class MobileDetailView(DetailView):
@@ -326,13 +287,10 @@ class ProductSearchView(ListView):
         qs = list(chain(s1, s2))
         price_gt = self.request.GET.get('price_gt')
         price_lt = self.request.GET.get('price_lt')
-        brand = self.request.GET.get('brand')
         ordering = self.request.GET.get('ordering')
         ava = self.request.GET.get('ava')
         if price_gt is not None and price_lt is not None:
-            qs = [x for x in qs if int(price_lt) >= x.price >= int(price_gt)]
-        if brand:
-            qs = [b for b in qs if brand in b.brand.slug]                     
+            qs = [x for x in qs if int(price_lt) >= x.price >= int(price_gt)]                    
         if ordering:
             if ordering == 'desc':
                 qs = sorted(qs, key=attrgetter('created')) 

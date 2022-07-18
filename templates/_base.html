@@ -267,7 +267,8 @@
                 </div>
                 <div class="col-lg-6 col-md-5 col-sm-8 col-7">
                     <div class="search-area default">
-                        <form method='get' action="{% url 'store_app:mobile-search' %}" class="search">
+                        {% comment %} {% url 'store_app:product-search' %} {% endcomment %}
+                        <form method='get' action="" class="search">
                             <input type="text" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…" name='q'>
                             <button type="submit"><img src="{% static 'img/search.png' %}" alt=""></button>
                         </form>
@@ -381,10 +382,10 @@
                                     </li>
                                     <li class="list-item list-item-has-children">
                                         <i class="now-ui-icons arrows-1_minimal-left"></i><a
-                                            class="main-list-item nav-link" href="{% url 'store_app:mobile-list' %}">گوشی موبایل</a>
+                                            class="main-list-item nav-link" href="{% url 'store_app:product-list' %}">گوشی موبایل</a>
                                         <ul class="sub-menu nav">
                                             <li class="list-item">
-                                                <a class="nav-link" href="{% url 'store_app:mobile-brand-list' 'iphone' %}">آیفون اپل</a>
+                                                <a class="nav-link" href="{% url 'store_app:product-brand-list' 'iphone' %}">آیفون اپل</a>
                                             </li>
                                             <li class="list-item">
                                                 <a class="nav-link" href="/">هوآوی</a>
@@ -406,10 +407,10 @@
                                                                                      href="/">موبایل</a>
                                 <ul class="sub-menu nav">
                                     <li class="list-item">
-                                        <a class="nav-link" href="{% url 'store_app:mobile-brand-list' 'iphone' %}">Apple</a>
+                                        <a class="nav-link" href="{% url 'store_app:product-brand-list' 'iphone' %}">Apple</a>
                                     </li>
                                     <li class="list-item">
-                                        <a class="nav-link" href="{% url 'store_app:mobile-brand-list' 'xiaomi' %}">Xiaomi</a>
+                                        <a class="nav-link" href="{% url 'store_app:product-brand-list' 'xiaomi' %}">Xiaomi</a>
                                     </li>
                                     <li class="list-item">
                                         <a class="nav-link" href="/">HTC</a>
@@ -429,13 +430,13 @@
                                 </ul>
                             </li>
                             <li class="list-item list-item-has-children">
-                                <i class="now-ui-icons arrows-1_minimal-left"></i><a class="nav-link" href="{% url 'store_app:laptop-list' %}">لپ تاپ</a>
+                                <i class="now-ui-icons arrows-1_minimal-left"></i><a class="nav-link" href="">لپ تاپ</a>
                                 <ul class="sub-menu nav">
                                     <li class="list-item">
-                                        <a class="nav-link" href="{% url 'store_app:laptop-brand-list' 'apple' %}">Apple</a>
+                                        <a class="nav-link" href="">Apple</a>
                                     </li>
                                     <li class="list-item">
-                                        <a class="nav-link" href="{% url 'store_app:laptop-brand-list' 'asus' %}">Asus</a>
+                                        <a class="nav-link" href="">Asus</a>
                                     </li>
                                     
                                     <li class="list-item">

@@ -31,19 +31,19 @@ class ProductMixin:
         context = super().get_context_data(**kwargs)
         context['fltr'] = ProductFilter(self.request.GET, queryset=self.model.objects.all())
         context['ordr'] = self.request.GET
-        context['min_price'] = min([mobile.price for mobile in self.model.objects.all()])
-        context['max_price'] = max([mobile.price for mobile in self.model.objects.all()])
+        context['min_price'] = min([product.price for product in self.model.objects.all()])
+        context['max_price'] = max([product.price for product in self.model.objects.all()])
         return context
 
 
-class MobileListView(ProductMixin, ListView):
+class ProductListView(ProductMixin, ListView):
     model = Product
-    template_name = 'store_app/mobile-list.html'
+    template_name = 'store_app/product-list.html'
     paginate_by = 10
 
 
-class MobileBrandListView(ProductMixin, ListView):
-    template_name = 'store_app/mobile-brand-list.html'
+class ProductBrandListView(ProductMixin, ListView):
+    template_name = 'store_app/product-brand-list.html'
     model = Product
 
     def get_queryset(self):
@@ -56,10 +56,10 @@ class MobileBrandListView(ProductMixin, ListView):
         return context
 
 
-class MobileDetailView(DetailView):
+class ProductDetailView(DetailView):
     model = Product
     template_name = 'store_app/single-product.html'
-    context_object_name = 'mobile'
+    context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,7 +75,7 @@ class MobileDetailView(DetailView):
                 product = Product.objects.get(pk=self.kwargs['pk'])
                 comment = Comment(user=user, message=message, product=product)
                 comment.save()
-            return redirect('store_app:mobile-detail', self.kwargs['pk'])
+            return redirect('store_app:product-detail', self.kwargs['pk'])
         else:
             product = Product.objects.get(id=self.kwargs['pk'])
             if Cart.objects.filter(product=product, user=request.user).exists():
@@ -108,7 +108,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['mobiles'] = Product.objects.all()[:7]
+        context['products'] = Product.objects.all()[:7]
         return context
 
 
@@ -136,9 +136,9 @@ def remove_from_cart(request, pk):
 
 
 
-# class MobileListView(ListView):
+# class productListView(ListView):
 #     model = Product
-#     template_name = 'store_app/mobile-list.html'
+#     template_name = 'store_app/product-list.html'
 #     context_object_name = 'filter'
 #     paginate_by = 1
 
@@ -152,11 +152,11 @@ def remove_from_cart(request, pk):
 #         return ProductFilter(self.request.GET, queryset=qs).qs
 
 #     def get_context_data(self, **kwargs):
-#         context = super(MobileListView, self).get_context_data(**kwargs)
+#         context = super(productListView, self).get_context_data(**kwargs)
 #         context['fltr'] = ProductFilter(self.request.GET, queryset=Product.objects.all())
 #         context['ordr'] = self.request.GET
-#         context['min_price'] = min([mobile.price for mobile in self.model.objects.all()])
-#         context['max_price'] = max([mobile.price for mobile in self.model.objects.all()])
+#         context['min_price'] = min([product.price for product in self.model.objects.all()])
+#         context['max_price'] = max([product.price for product in self.model.objects.all()])
 #         return context
 
 
@@ -184,8 +184,8 @@ def remove_from_cart(request, pk):
     #     return context
 
 
-# class MobileBrandListView(ListView):
-#     template_name = 'store_app/mobile-brand-list.html'
+# class productBrandListView(ListView):
+#     template_name = 'store_app/product-brand-list.html'
 #     model = Product
 #     context_object_name = 'filter'
 #     paginate_by = 1
@@ -233,7 +233,7 @@ def remove_from_cart(request, pk):
 
 # class ProductSearchView(ListView):
 #     template_name = 'store_app/search.html'
-#     context_object_name = 'mobiles'
+#     context_object_name = 'products'
 #     paginate_by = 12
 
 #     def querystring(self):

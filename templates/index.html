@@ -364,21 +364,21 @@
                                     <h3 class="card-title">
                                         <span> تلفن همراه  </span>
                                     </h3>
-                                    <a href="{% url 'store_app:mobile-list' %}" class="view-all">مشاهده همه</a>
+                                    <a href="{% url 'store_app:product-list' %}" class="view-all">مشاهده همه</a>
                                 </header>
                                 <div class="product-carousel owl-carousel owl-theme">
-                                    {% for mobile in mobiles %}
+                                    {% for product in products %}
                                     <div class="item">
-                                        <a href="{{ mobile.get_absolute_url }}"> 
-                                            <img src="{{ mobile.image.url }}"
+                                        <a href="{{ product.get_absolute_url }}"> 
+                                            <img src="{{ product.image.url }}"
                                                  class="img-fluid" alt="">
                                         </a>
                                         <h2 class="post-title">
-                                            <a href="/">{{ mobile.persian_title }}</a>
+                                            <a href="/">{{ product.persian_title }}</a>
                                         </h2>
                                         <div class="price">
                                             <div class="text-center">
-                                                <ins><span>{{ mobile.price|intcomma }}<span>تومان</span></span></ins>
+                                                <ins><span>{{ product.price|intcomma }}<span>تومان</span></span></ins>
                                             </div>
                                         </div>
                                     </div>
@@ -419,7 +419,7 @@
                                     <h3 class="card-title">
                                         <span>کامپیوتر و لوازم جانبی</span>
                                     </h3>
-                                    <a href="{% url 'store_app:mobile-list' %}" class="view-all">مشاهده همه</a>
+                                    <a href="{% url 'store_app:product-list' %}" class="view-all">مشاهده همه</a>
                                 </header>
                                 <div class="product-carousel owl-carousel owl-theme">
                                     <div class="item">

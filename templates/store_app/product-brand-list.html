@@ -71,21 +71,21 @@
                                 <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist"
                                     data-label="مرتب‌سازی بر اساس :">
                                     <li>
-                                        <a href="{% url 'store_app:mobile-brand-list' brand %}{%if view.querystring %}?{% endif %}{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}"
+                                        <a href="{% url 'store_app:product-brand-list' brand %}{%if view.querystring %}?{% endif %}{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}"
                                         {% if not ordr.ordering %} class="active" {% endif %}>مرتبط‌ترین</a>
                                     </li>
                                     
                                     <li>
-                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=desc&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
+                                        <a href="{% url 'store_app:product-brand-list' brand %}?ordering=desc&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
                                         {% if ordr.ordering == 'desc' %}class="active" {% endif %}>جدیدترین</a>
                                     </li>
                                    
                                     <li>
-                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=price-l2h&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
+                                        <a href="{% url 'store_app:product-brand-list' brand %}?ordering=price-l2h&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
                                             {% if ordr.ordering == 'price-l2h' %} class="active" {% endif %}>ارزان‌ترین</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'store_app:mobile-brand-list' brand %}?ordering=price-h2l&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" role="tab"
+                                        <a href="{% url 'store_app:product-brand-list' brand %}?ordering=price-h2l&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" role="tab"
                                             {% if ordr.ordering == 'price-h2l' %} class="active" {% endif %} aria-expanded="false">گران‌ترین</a>
                                     </li>
                                 </ul>
@@ -97,7 +97,7 @@
                                         <ul class="row listing-items">
 
 
-                                        {% for mobile in filter %}
+                                        {% for product in filter %}
                                             
                                             <li class="col-xl-3 col-lg-4 col-md-6 col-12 no-padding">
                                                 <div class="product-box">
@@ -108,14 +108,14 @@
                                                             </span>دیجی کالا</span>
                                                         <span class="product-seller-details-badge-container"></span>
                                                     </div>
-                                                    <a class="product-box-img" href="{{ mobile.get_absolute_url }}">
-                                                        <img src="{{ mobile.image.url }}" alt="">
+                                                    <a class="product-box-img" href="{{ product.get_absolute_url }}">
+                                                        <img src="{{ product.image.url }}" alt="">
                                                     </a>
                                                     <div class="product-box-content">
                                                         <div class="product-box-content-row">
                                                             <div class="product-box-title">
                                                                 <a href="#">
-                                                                    {{ mobile.persian_title }}
+                                                                    {{ product.persian_title }}
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -123,7 +123,7 @@
                                                             <div class="price">
                                                                 <div class="price-value">
                                                                     <div class="price-value-wrapper">
-                                                                        {{ mobile.price|intcomma }} <span
+                                                                        {{ product.price|intcomma }} <span
                                                                             class="price-currency">تومان</span>
                                                                     </div>
                                                                 </div>

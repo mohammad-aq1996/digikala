@@ -1,4 +1,6 @@
 {% load static %}
+{% load humanize %}
+
 <!DOCTYPE html>
 <html lang="fa">
 
@@ -166,7 +168,7 @@
                         <div class="checkout-summary">
                             <div class="checkout-summary-main">
                                 <ul class="checkout-summary-summary">
-                                    <li><span>مبلغ کل (۱ کالا)</span><span>۱۵,۳۹۰,۰۰۰ تومان</span></li>
+                                    <li><span>مبلغ کل </span><span>{{total_price|intcomma}} تومان</span></li>
                                     <li>
                                         <span>هزینه ارسال</span>
                                         <span>وابسته به آدرس<span class="wiki wiki-holder"><span
@@ -194,7 +196,7 @@
                                 <div class="checkout-summary-content">
                                     <div class="checkout-summary-price-title">مبلغ قابل پرداخت:</div>
                                     <div class="checkout-summary-price-value">
-                                        <span class="checkout-summary-price-value-amount">۱۵,۳۹۰,۰۰۰</span>تومان
+                                        <span class="checkout-summary-price-value-amount">{{total_price|intcomma}}</span> تومان
                                     </div>
 
                                 {% if user.address and user.phone and user.post_id and user.receiver_name %}

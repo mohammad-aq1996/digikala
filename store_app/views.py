@@ -144,8 +144,8 @@ class CartListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['totla_price'] = sum([int(c.product.price) for c in Cart.objects.filter(user__username='mamali')])
         context['totla_count'] = Cart.objects.filter(user__username=self.request.user).count()
+        print(context)
         return context
 
 

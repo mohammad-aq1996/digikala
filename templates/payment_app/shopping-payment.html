@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block title %} Digikala {% endblock %}
 
 {% block content %}
@@ -125,7 +125,7 @@
                             <div class="checkout-summary">
                                 <div class="checkout-summary-main">
                                     <ul class="checkout-summary-summary">
-                                        <li><span>مبلغ کل ({{ total_count }} کالا)</span><span>{{ total_price }} تومان</span></li>
+                                        <li><span>مبلغ کل ({{ total_count }} کالا)</span><span>{{ total_price|intcomma }} تومان</span></li>
                                         <li>
                                             <span>هزینه ارسال</span>
                                             <span>وابسته به آدرس<span class="wiki wiki-holder"><span
@@ -153,7 +153,7 @@
                                     <div class="checkout-summary-content">
                                         <div class="checkout-summary-price-title">مبلغ قابل پرداخت:</div>
                                         <div class="checkout-summary-price-value">
-                                            <span class="checkout-summary-price-value-amount">{{ total_price }}</span>تومان
+                                            <span class="checkout-summary-price-value-amount">{{ total_price|intcomma }}</span>تومان
                                         </div>
                                         <a href="{% url 'payment_app:shopping-compelete' %}" class="selenium-next-step-shipping">
                                             <div class="parent-btn">

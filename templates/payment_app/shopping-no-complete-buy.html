@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block title %} Digikala {% endblock %}
 
 {% block content %}
@@ -37,7 +37,7 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">تعداد مرسوله : 1</th>
-                                                <td>مبلغ کل : {{ total_price }}</td>
+                                                <td>مبلغ کل : {{ total_price|intcomma }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">وضعیت پرداخت : پرداخت آنلاین(ناموفق)</th>

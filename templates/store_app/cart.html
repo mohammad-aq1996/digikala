@@ -32,7 +32,8 @@
                                             </h3>
                                         </td>
                                         <td>{{ cart.quantity }} عدد</td>
-                                        <td>{{ cart.product.price|intcomma }} تومان</td>
+                                        {% widthratio cart.product.price 1 cart.quantity as price %}
+                                        <td> {{price|intcomma}} تومان</td>
                                     </tr>
                                    
                                 </tbody>
@@ -45,7 +46,7 @@
                             <div class="checkout-summary">
                                 <div class="checkout-summary-main">
                                     <ul class="checkout-summary-summary">
-                                        <li><span>مبلغ کل ({{totla_count}} کالا)</span><span>{{totla_price|intcomma}} تومان</span></li>
+                                        <li><span>مبلغ کل ({{totla_count}} کالا)</span><span>{{total_price|intcomma}} تومان</span></li>
                                         <li>
                                             <span>هزینه ارسال</span>
                                             <span>وابسته به آدرس<span class="wiki wiki-holder"><span
@@ -73,7 +74,7 @@
                                     <div class="checkout-summary-content">
                                         <div class="checkout-summary-price-title">مبلغ قابل پرداخت:</div>
                                         <div class="checkout-summary-price-value">
-                                            <span class="checkout-summary-price-value-amount">{{ totla_price|intcomma }}</span>تومان
+                                            <span class="checkout-summary-price-value-amount">{{ total_price|intcomma }}</span> تومان
                                         </div>
                                         <a href="{% url 'payment_app:shopping' %}" class="selenium-next-step-shipping">
                                             <div class="parent-btn">

@@ -23,8 +23,7 @@ class ProductMixin:
         qs.pop(self.page_kwarg, None)
         return qs.urlencode()
 
-    def get_queryset(self):
-        qs = self.model.objects.all()
+    def get_queryset(self, qs):
         return ProductFilter(self.request.GET, queryset=qs).qs
 
     def get_context_data(self, **kwargs):
@@ -33,6 +32,7 @@ class ProductMixin:
         context['ordr'] = self.request.GET
         context['min_price'] = min([product.price for product in self.model.objects.all()])
         context['max_price'] = max([product.price for product in self.model.objects.all()])
+        context['brand'] = Brand.objects.all()
         return context
 
 
@@ -40,6 +40,16 @@ class ProductListView(ProductMixin, ListView):
     model = Product
     template_name = 'store_app/product-list.html'
     paginate_by = 10
+
+    def get_queryset(self):
+        if self.kwargs['slug'] == 'phone':
+            qs = self.model.objects.filter(category__title='phone')
+            return super().get_queryset(qs)
+        elif self.kwargs['slug'] == 'laptop':
+            qs = self.model.objects.filter(category__title='laptop')
+            return super().get_queryset(qs)
+
+
 
 
 class ProductBrandListView(ProductMixin, ListView):
@@ -132,100 +142,6 @@ def remove_from_cart(request, pk):
 
 
 
-
-
-
-
-# class productListView(ListView):
-#     model = Product
-#     template_name = 'store_app/product-list.html'
-#     context_object_name = 'filter'
-#     paginate_by = 1
-
-#     def querystring(self):
-#         qs = self.request.GET.copy()
-#         qs.pop(self.page_kwarg, None)
-#         return qs.urlencode()
-
-#     def get_queryset(self):
-#         qs = Product.objects.all()
-#         return ProductFilter(self.request.GET, queryset=qs).qs
-
-#     def get_context_data(self, **kwargs):
-#         context = super(productListView, self).get_context_data(**kwargs)
-#         context['fltr'] = ProductFilter(self.request.GET, queryset=Product.objects.all())
-#         context['ordr'] = self.request.GET
-#         context['min_price'] = min([product.price for product in self.model.objects.all()])
-#         context['max_price'] = max([product.price for product in self.model.objects.all()])
-#         return context
-
-
-# class LaptopListView(ListView):
-    # model = Product
-    # template_name = 'store_app/laptop-list.html'
-    # context_object_name = 'filter'
-    # paginate_by = 1
-
-    # def querystring(self):
-    #     qs = self.request.GET.copy()
-    #     qs.pop(self.page_kwarg, None)
-    #     return qs.urlencode()
-
-    # def get_queryset(self):
-    #     qs = self.model.objects.all()
-    #     return ProductFilter(self.request.GET, queryset=qs).qs
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(LaptopListView, self).get_context_data(**kwargs)
-    #     context['fltr'] = ProductFilter(self.request.GET, queryset=self.model.objects.all())
-    #     context['ordr'] = self.request.GET
-    #     context['min_price'] = min([int(laptop.price) for laptop in Product.objects.all()])
-    #     context['max_price'] = max([int(laptop.price) for laptop in Product.objects.all()])
-    #     return context
-
-
-# class productBrandListView(ListView):
-#     template_name = 'store_app/product-brand-list.html'
-#     model = Product
-#     context_object_name = 'filter'
-#     paginate_by = 1
-
-#     def querystring(self):
-#         qs = self.request.GET.copy()
-#         qs.pop(self.page_kwarg, None)
-#         return qs.urlencode()
-
-#     def get_queryset(self):
-#         qs = Product.objects.filter(brand__slug=self.kwargs['brand'])
-#         return ProductFilter(self.request.GET, queryset=qs).qs
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['fltr'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
-#         context['ordr'] = self.request.GET
-#         context['brand'] = self.kwargs['brand']
-#         return context
-# class LaptopBrandListView(ListView):
-#     template_name = 'store_app/laptop-brand-list.html'
-#     model = Product
-#     context_object_name = 'filter'
-#     paginate_by = 1
-
-#     def querystring(self):
-#         qs = self.request.GET.copy()
-#         qs.pop(self.page_kwarg, None)
-#         return qs.urlencode()
-
-#     def get_queryset(self):
-#         qs = self.model.objects.filter(brand__slug=self.kwargs['brand'])
-#         return ProductFilter(self.request.GET, queryset=qs).qs
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['fltr'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
-#         context['ordr'] = self.request.GET
-#         context['brand'] = self.kwargs['brand']
-#         return context
 
 
 

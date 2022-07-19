@@ -382,7 +382,7 @@
                                     </li>
                                     <li class="list-item list-item-has-children">
                                         <i class="now-ui-icons arrows-1_minimal-left"></i><a
-                                            class="main-list-item nav-link" href="{% url 'store_app:product-list' %}">گوشی موبایل</a>
+                                            class="main-list-item nav-link" href="{% url 'store_app:product-list' 'phone' %}">گوشی موبایل</a>
                                         <ul class="sub-menu nav">
                                             <li class="list-item">
                                                 <a class="nav-link" href="{% url 'store_app:product-brand-list' 'iphone' %}">آیفون اپل</a>
@@ -430,7 +430,7 @@
                                 </ul>
                             </li>
                             <li class="list-item list-item-has-children">
-                                <i class="now-ui-icons arrows-1_minimal-left"></i><a class="nav-link" href="">لپ تاپ</a>
+                                <i class="now-ui-icons arrows-1_minimal-left"></i><a class="nav-link" href="{% url 'store_app:product-list' 'laptop' %}">لپ تاپ</a>
                                 <ul class="sub-menu nav">
                                     <li class="list-item">
                                         <a class="nav-link" href="">Apple</a>

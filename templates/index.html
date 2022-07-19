@@ -364,7 +364,7 @@
                                     <h3 class="card-title">
                                         <span> تلفن همراه  </span>
                                     </h3>
-                                    <a href="{% url 'store_app:product-list' %}" class="view-all">مشاهده همه</a>
+                                    <a href="{% url 'store_app:product-list' 'phone' %}" class="view-all">مشاهده همه</a>
                                 </header>
                                 <div class="product-carousel owl-carousel owl-theme">
                                     {% for product in products %}
@@ -419,7 +419,7 @@
                                     <h3 class="card-title">
                                         <span>کامپیوتر و لوازم جانبی</span>
                                     </h3>
-                                    <a href="{% url 'store_app:product-list' %}" class="view-all">مشاهده همه</a>
+                                    <a href="{% url 'store_app:product-list' 'laptop' %}" class="view-all">مشاهده همه</a>
                                 </header>
                                 <div class="product-carousel owl-carousel owl-theme">
                                     <div class="item">

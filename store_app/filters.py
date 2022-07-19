@@ -14,11 +14,11 @@ class ProductFilter(django_filters.FilterSet):
         ("price-l2h", "قیمت صعودی"),
     )
     BRAND_CHOICES = (
-        ("5", "apple"),
+        ("1", "apple"),
         ("2", "samsung"),
         ("3", "xiaomi"),
-        ("4", "apple"),
-        ("5", "asus"),
+        ("4", "asus"),
+        ("5", "lenovo"),
     )
     ordering = django_filters.ChoiceFilter(label="Ordering", choices=CHOICES, method="filter_by_order")
 

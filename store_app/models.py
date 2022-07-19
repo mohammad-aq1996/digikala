@@ -97,7 +97,7 @@ class Product(models.Model):
         return self.english_title
 
     def get_absolute_url(self):
-        return reverse('store_app:mobile-detail', kwargs={'pk': self.id})
+        return reverse('store_app:product-detail', kwargs={'pk': self.id})
 
 
 class Comment(models.Model):

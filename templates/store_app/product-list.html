@@ -51,8 +51,19 @@
                                     <div class="collapse show" id="collapseExample2">
                                        
                                         <div class="filter-option">
+                                            {% for b in brand %}
+                                            {% with b.pk|stringformat:'s' as z %}
+                                                <div class="checkbox">
+                                                    <input name="brand" id="{{b.pk}}" value={{b.pk}} type="checkbox" {% if "brand="|add:z in request.get_full_path %}checked{% endif %}>
+                                                    <label for="{{b.pk}}">
+                                                        {{b.title}}
+                                                    </label>
+                                                </div>
+                                                {% endwith %}
+                                            {% endfor %}
+
                                             
-                                            <div class="checkbox">
+                                            {% comment %} <div class="checkbox">
                                                 <input name="brand" value=5 id="checkbox8" type="checkbox" {% if 'brand=5' in request.get_full_path %}checked{% endif %}>
                                                 <label for="checkbox8">
                                                     اپل
@@ -93,7 +104,7 @@
                                                 <label for="checkbox14">
                                                     فراری
                                                 </label>
-                                            </div>
+                                            </div> {% endcomment %}
 
                                         </div>
                                     </div>
@@ -132,26 +143,54 @@
                             <div class="listing-header default">
                                 <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist"
                                     data-label="مرتب‌سازی بر اساس :">
-                                    <li>
-                                        <a href="{% url 'store_app:product-list' %}{%if view.querystring %}?{% endif %}{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}"
-                                        {% if not ordr.ordering %} class="active" {% endif %}>مرتبط‌ترین</a>
-                                    </li>
+                                    {% if 'phone' in request.get_full_path %}
+                                        {% with 'phone' as pro %}
+                                        <li>
+                                            <a href="{% url 'store_app:product-list' pro %}{%if view.querystring %}?{% endif %}{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}"
+                                            {% if not ordr.ordering %} class="active" {% endif %}>مرتبط‌ترین</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'store_app:product-list' pro %}?ordering=desc&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
+                                            {% if ordr.ordering == 'desc' %}class="active" {% endif %}>جدیدترین</a>
+                                        </li>
+                                       
+                                        <li>
+                                            <a href="{% url 'store_app:product-list' pro %}?ordering=price-l2h&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
+                                                {% if ordr.ordering == 'price-l2h' %} class="active" {% endif %}>ارزان‌ترین</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'store_app:product-list' pro %}?ordering=price-h2l&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" role="tab"
+                                                {% if ordr.ordering == 'price-h2l' %} class="active" {% endif %} aria-expanded="false">گران‌ترین</a>
+                                        </li>
+                                        {% endwith %}
+
+                                    {% elif 'laptop' in request.get_full_path %}
+                                        {% with 'laptop' as pro %}
+                                        <li>
+                                            <a href="{% url 'store_app:product-list' pro %}{%if view.querystring %}?{% endif %}{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}"
+                                            {% if not ordr.ordering %} class="active" {% endif %}>مرتبط‌ترین</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'store_app:product-list' pro %}?ordering=desc&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
+                                            {% if ordr.ordering == 'desc' %}class="active" {% endif %}>جدیدترین</a>
+                                        </li>
+                                       
+                                        <li>
+                                            <a href="{% url 'store_app:product-list' pro %}?ordering=price-l2h&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
+                                                {% if ordr.ordering == 'price-l2h' %} class="active" {% endif %}>ارزان‌ترین</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'store_app:product-list' pro %}?ordering=price-h2l&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" role="tab"
+                                                {% if ordr.ordering == 'price-h2l' %} class="active" {% endif %} aria-expanded="false">گران‌ترین</a>
+                                        </li>
+                                        {% endwith %}
+
+                                    {% endif %}
                                     
-                                    <li>
-                                        <a href="{% url 'store_app:product-list' %}?ordering=desc&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
-                                        {% if ordr.ordering == 'desc' %}class="active" {% endif %}>جدیدترین</a>
-                                    </li>
-                                   
-                                    <li>
-                                        <a href="{% url 'store_app:product-list' %}?ordering=price-l2h&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" 
-                                            {% if ordr.ordering == 'price-l2h' %} class="active" {% endif %}>ارزان‌ترین</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'store_app:product-list' %}?ordering=price-h2l&{% if 'ordering' in view.querystring %}{{ view.querystring|order }}{% else %}{{ view.querystring }}{% endif %}" role="tab"
-                                            {% if ordr.ordering == 'price-h2l' %} class="active" {% endif %} aria-expanded="false">گران‌ترین</a>
-                                    </li>
+                                    
+                                    
                                 </ul>
-                            </div>
+                            </div> 
 
                             <div class="tab-content default text-center">
                                 <div class="tab-pane active" id="related" role="tabpanel" aria-expanded="true">

@@ -50,19 +50,30 @@ class ProductListView(ProductMixin, ListView):
             return super().get_queryset(qs)
 
 
+class ProductSearchView(ListView):
+    template_name = 'store_app/search.html'
+    context_object_name = 'products'
+    paginate_by = 12
 
-
-class ProductBrandListView(ProductMixin, ListView):
-    template_name = 'store_app/product-brand-list.html'
-    model = Product
+    def querystring(self):
+        qs = self.request.GET.copy()
+        qs.pop(self.page_kwarg, None)
+        return qs.urlencode()
 
     def get_queryset(self):
-        qs = Product.objects.filter(brand__slug=self.kwargs['brand'])
+        qry = self.request.GET.get('q')
+        qs = Product.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
         return ProductFilter(self.request.GET, queryset=qs).qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['brand'] = self.kwargs['brand']
+        context['ordr'] = self.request.GET
+        context['qr'] = self.request.GET.get("q")
+        context['fltr'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
+        context['ordr'] = self.request.GET
+        context['min_price'] = min([product.price for product in self.get_queryset()])
+        context['max_price'] = max([product.price for product in self.get_queryset()])
+        context['brand'] = Brand.objects.all()
         return context
 
 
@@ -131,62 +142,3 @@ def remove_from_cart(request, pk):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Get Back and fix this bastered
-
-# class ProductSearchView(ListView):
-#     template_name = 'store_app/search.html'
-#     context_object_name = 'products'
-#     paginate_by = 12
-
-#     def querystring(self):
-#         qs = self.request.GET.copy()
-#         qs.pop(self.page_kwarg, None)
-#         return qs.urlencode()
-
-#     def get_queryset(self):
-#         qry = self.request.GET.get('q')
-#         s1 = Product.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
-#         s2 = Product.objects.filter(Q(english_title__icontains=qry) | Q(persian_title__icontains=qry) | Q(review__icontains=qry))
-#         qs = list(chain(s1, s2))
-#         price_gt = self.request.GET.get('price_gt')
-#         price_lt = self.request.GET.get('price_lt')
-#         ordering = self.request.GET.get('ordering')
-#         ava = self.request.GET.get('ava')
-#         if price_gt is not None and price_lt is not None:
-#             qs = [x for x in qs if int(price_lt) >= x.price >= int(price_gt)]                    
-#         if ordering:
-#             if ordering == 'desc':
-#                 qs = sorted(qs, key=attrgetter('created')) 
-#             elif ordering == 'price-l2h':
-#                 qs = sorted(qs, key=attrgetter('price')) 
-#             elif ordering == 'price-h2l':
-#                 qs = sorted(qs, key=attrgetter('price'), reverse=True) 
-#         if ava:
-#             qs = [x for x in qs if x.available==True]
-#         return qs
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['ordr'] = self.request.GET
-#         context['qr'] = self.request.GET.get("q")
-#         min_mob = Product.objects.all().aggregate(Min('price'))
-#         min_lap = Product.objects.all().aggregate(Min('price'))
-#         max_mob = Product.objects.all().aggregate(Max('price'))
-#         max_lap = Product.objects.all().aggregate(Max('price'))
-#         context['min_price'] = min(min_mob['price__min'], min_lap['price__min'])
-#         context['max_price'] = max(max_mob['price__max'], max_lap['price__max'])
-#         return context

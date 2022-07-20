@@ -267,8 +267,7 @@
                 </div>
                 <div class="col-lg-6 col-md-5 col-sm-8 col-7">
                     <div class="search-area default">
-                        {% comment %} {% url 'store_app:product-search' %} {% endcomment %}
-                        <form method='get' action="" class="search">
+                        <form method='get' action="{% url 'store_app:product-search' %}" class="search">
                             <input type="text" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…" name='q'>
                             <button type="submit"><img src="{% static 'img/search.png' %}" alt=""></button>
                         </form>

@@ -363,84 +363,36 @@
                     <li class="list-item list-item-has-children mega-menu mega-menu-col-5">
                         <a class="nav-link" href="/">کالای دیجیتال</a>
                         <ul class="sub-menu nav">
+                            
                             <li class="list-item list-item-has-children">
-                                <i class="now-ui-icons arrows-1_minimal-left"></i><a class="main-list-item nav-link"
-                                                                                     href="/">لوازم
-                                جانبی گوشی</a>
+                                <i class="now-ui-icons arrows-1_minimal-left"></i>
+                                <a class="main-list-item nav-link" href="{% url 'store_app:product-list' 'phone' %}">موبایل</a>
                                 <ul class="sub-menu nav">
                                     <li class="list-item">
-                                        <a class="nav-link" href="/">کیف و کاور گوشی</a>
+                                        <a class="nav-link" href="{% url 'store_app:product-list' 'phone' %}?brand=1">آیفون</a>
                                     </li>
                                     <li class="list-item">
-                                        <a class="nav-link" href="/">پاور بانک</a>
+                                        <a class="nav-link" href="{% url 'store_app:product-list' 'phone' %}?brand=3">شیائومی</a>
                                     </li>
+                            
                                     <li class="list-item">
-                                        <a class="nav-link" href="/">هندزفری،هدفون</a>
+                                        <a class="nav-link" href="{% url 'store_app:product-list' 'phone' %}?brand=2">سامسونگ</a>
                                     </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">پایه نگهدارنده گوشی</a>
-                                    </li>
-                                    <li class="list-item list-item-has-children">
-                                        <i class="now-ui-icons arrows-1_minimal-left"></i><a
-                                            class="main-list-item nav-link" href="{% url 'store_app:product-list' 'phone' %}">گوشی موبایل</a>
-                                        <ul class="sub-menu nav">
-                                            <li class="list-item">
-                                                <a class="nav-link" href="{% url 'store_app:product-brand-list' 'iphone' %}">آیفون اپل</a>
-                                            </li>
-                                            <li class="list-item">
-                                                <a class="nav-link" href="/">هوآوی</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="list-item">
-                                        <i class="now-ui-icons arrows-1_minimal-left"></i><a
-                                            class="main-list-item nav-link" href="/">ساعت هوشمند</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <i class="now-ui-icons arrows-1_minimal-left"></i><a
-                                            class="main-list-item nav-link" href="/">اسپیکر بلوتوث و با سیم</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="list-item list-item-has-children">
-                                <i class="now-ui-icons arrows-1_minimal-left"></i><a class="main-list-item nav-link"
-                                                                                     href="/">موبایل</a>
-                                <ul class="sub-menu nav">
-                                    <li class="list-item">
-                                        <a class="nav-link" href="{% url 'store_app:product-brand-list' 'iphone' %}">Apple</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="{% url 'store_app:product-brand-list' 'xiaomi' %}">Xiaomi</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">HTC</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">LG</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">Nokia</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">Samsung</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="nav-link" href="/">Sony</a>
-                                    </li>
+
                                 </ul>
                             </li>
                             <li class="list-item list-item-has-children">
                                 <i class="now-ui-icons arrows-1_minimal-left"></i><a class="nav-link" href="{% url 'store_app:product-list' 'laptop' %}">لپ تاپ</a>
                                 <ul class="sub-menu nav">
                                     <li class="list-item">
-                                        <a class="nav-link" href="">Apple</a>
+                                        <a class="nav-link" href="{% url 'store_app:product-list' 'laptop' %}?brand=1">اپل</a>
                                     </li>
                                     <li class="list-item">
-                                        <a class="nav-link" href="">Asus</a>
+                                        <a class="nav-link" href="{% url 'store_app:product-list' 'laptop' %}?brand=4">ایسوس</a>
                                     </li>
                                     
                                     <li class="list-item">
-                                        <a class="nav-link" href="/">Samsung</a>
+                                        <a class="nav-link" href="{% url 'store_app:product-list' 'laptop' %}?brand=5">لنوو</a>
                                     </li>
                                 </ul>
                             </li>

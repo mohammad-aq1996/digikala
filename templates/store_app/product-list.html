@@ -209,7 +209,7 @@
                                                             </span>دیجی کالا</span>
                                                         <span class="product-seller-details-badge-container"></span>
                                                     </div>
-                                                    <a class="product-box-img" href="{% if product.category.title == 'phone' %}{% url 'store_app:mobile-detail' product.pk %}{% endif %}">
+                                                    <a class="product-box-img" href="{% if product.category.title == 'phone' %}{% url 'store_app:mobile-detail' product.pk %}{% elif product.category.title == 'laptop' %}{% url 'store_app:laptop-detail' product.pk %}{% endif %}">
                                                         <img src="{{ product.image.url }}" alt="">
                                                     </a>
                                                     <div class="product-box-content">

@@ -29,7 +29,7 @@
                                     <a href="#"><span>گوشی موبایل</span></a>
                                 </li>
                                 <li>
-                                    <span>{{ mobile.persian_title }}</span>
+                                    <span>{{ laptop.persian_title }}</span>
                                 </li>
                             </ul>
                         </nav>
@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="product-gallery default">
-                                        <img class="zoom-img" id="img-product-zoom" src="{{ mobile.image.url}}" data-zoom-image="{{ product.image.url }}" width="411" />
+                                        <img class="zoom-img" id="img-product-zoom" src="{{ laptop.image.url}}" data-zoom-image="{{ laptop.image.url }}" width="411" />
 
                                     </div>
                          
@@ -49,19 +49,19 @@
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="product-title default">
                                         <h1>
-                                            {{ product.persian_title }}
-                                            <span>{{ product.english_title }}</span></h1>
+                                            {{ laptop.persian_title }}
+                                            <span>{{ laptop.english_title }}</span></h1>
                                     </div>
                                     <div class="product-directory default">
                                         <ul>
                                             <li>
                                                 <span>برند</span> :
-                                                <span class="product-brand-title">{{ product.brand.title }}</span>
+                                                <span class="product-brand-title">{{ laptop.brand.title }}</span>
                                             </li>
                                             <li>
                                                 <span>دسته‌بندی</span> :
-                                                <a href="{% url 'store_app:product-list' 'phone' %}" class="btn-link-border">
-                                                    {{ product.category.title }}
+                                                <a href="{% url 'store_app:product-list' 'laptop' %}" class="btn-link-border">
+                                                    {{ laptop.category.title }}
                                                 </a>
                                             </li>
                                         </ul>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="price-product defualt">
                                         <div class="price-value">
-                                            <span> {{ product.price|intcomma }} </span>
+                                            <span> {{ laptop.price|intcomma }} </span>
                                             <span class="price-currency">تومان</span>
                                         </div>
                                         <div class="price-discount" data-title="تخفیف">
@@ -123,25 +123,25 @@
                                     <div class="product-params default">
                                         <ul data-title="ویژگی‌های محصول">
                                             <li>
-                                                <span>حافظه داخلی: </span>
-                                                <span> {{ product.internal_storage }} گیگابایت </span>
+                                                <span>حافظه هارد: </span>
+                                                <span> {{ laptop.internal_storage }} </span>
                                             </li>
                                             <li>
-                                                <span>شبکه های ارتباطی: </span>
-                                                <span> {{ product.networks }} </span>
+                                                <span>سایز صفحه نمایش: </span>
+                                                <span> {{ laptop.screen_size }} اینچ </span>
                                             </li>
                                             <li>
-                                                <span>رزولوشن عکس: </span>
-                                                <span> {{ product.pic_resolution }} مگاپیکسل</span>
+                                                <span>تعداد پورت:</span>
+                                                <span> {{ laptop.usb_port_no }} عدد </span>
                                             </li>
                                             <li>
-                                                <span>تعداد سیم کارت: </span>
-                                                <span> {{ product.simcard_no }} </span>
+                                                <span>  حافظه رم: </span>
+                                                <span> {{ laptop.ram }} گیگابایت </span>
                                             </li>
                                             <li>
-                                                <span>ویژگی‌های خاص: </span>
+                                                <span> وزن: </span>
                                                 <span> 
-                                                    {{ product.special_features }}
+                                                    {{ laptop.weight }} گرم
                                                 </span>
                                             </li>
                                         </ul>
@@ -185,9 +185,9 @@
                                                 <article>
                                                     <h2 class="param-title">
                                                         نقد و بررسی تخصصی
-                                                        <span>{{ product.persian_title }}</span>
+                                                        <span>{{ laptop.persian_title }}</span>
                                                     </h2>
-                                                    <p> {{ product.review }} </p>
+                                                    <p> {{ laptop.review }} </p>
 
                                                 </article>
                                             </div>
@@ -195,7 +195,7 @@
                                                 <article>
                                                     <h2 class="param-title">
                                                         مشخصات فنی
-                                                        <span>{{ product.english_title }}</span>
+                                                        <span>{{ laptop.english_title }}</span>
                                                     </h2>
                                                     <section>
                                                         <h3 class="params-title">مشخصات کلی</h3>
@@ -207,27 +207,27 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.weight }} گرم
+                                                                        {{ laptop.weight }} گرم
                                                                     </span>
                                                                 </div>
                                                             </li>
                                                             <li>
                                                                 <div class="params-list-key">
-                                                                    <span class="block">ویژگی‌های خاص</span>
+                                                                    <span class="block"> صفحه نمایش</span>
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.special_features }}
+                                                                        {{ laptop.screen_size }}
                                                                     </span>
                                                                 </div>
                                                             </li>
                                                             <li>
                                                                 <div class="params-list-key">
-                                                                    <span class="block">تعداد سیم کارت</span>
+                                                                    <span class="block">حافظه رم</span>
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.simcard_no }}
+                                                                        {{ laptop.ram }} گیگابایت
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -237,17 +237,17 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.chipset }}
+                                                                        {{ laptop.chipset }}
                                                                     </span>
                                                                 </div>
                                                             </li>
                                                             <li>
                                                                 <div class="params-list-key">
-                                                                    <span class="block">نوع پردازنده</span>
+                                                                    <span class="block">  سازنده پردازنده گرافیکی</span>
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.chipset_type }} بیت
+                                                                        {{ laptop.proccessor_builder }}
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -258,24 +258,25 @@
                                                         <ul class="params-list">
                                                             <li>
                                                                 <div class="params-list-key">
-                                                                    <span class="block">تراشه</span>
+                                                                    <span class="block">سری پردازنده</span>
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.chipset }}
+                                                                        {{ laptop.proccessor_serie }}
                                                                     </span>
                                                                 </div>
                                                             </li>
                                                             <li>
                                                                 <div class="params-list-key">
-                                                                    <span class="block">نوع پردازنده</span>
+                                                                    <span class="block">سازنده پردازنده</span>
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.chipset_type }} بیت
+                                                                        {{ laptop.proccessor_builder }}
                                                                     </span>
                                                                 </div>
                                                             </li>
+                                                            
                                                         </ul>
                                                     </section>
                                                 </article>

@@ -72,7 +72,7 @@ class ProductSearchView(ListView):
 class MobileDetailView(DetailView):
     model = Product
     template_name = 'store_app/mobile-detail.html'
-    context_object_name = 'product'
+    context_object_name = 'mobile'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -90,6 +90,42 @@ class MobileDetailView(DetailView):
                 comment.save()
             return redirect('store_app:product-detail', self.kwargs['pk'])
         else:
+            if not request.user.is_authenticated:
+                return redirect('accounts_app:login')
+            product = Product.objects.get(id=self.kwargs['pk'])
+            if Cart.objects.filter(product=product, user=request.user).exists():
+                cart = Cart.objects.get(product=product, user=request.user)
+                cart.quantity = cart.quantity + 1
+                cart.save()
+            else:
+                Cart.objects.create(product=product, user=request.user)
+
+            return redirect('store_app:cart')
+
+
+class LaptopDetailView(DetailView):
+    model = Product
+    template_name = 'store_app/laptop-detail.html'
+    context_object_name = 'laptop'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(status='p', product=Product.objects.get(pk=self.kwargs['pk']))
+        return context
+
+    def post(self, request, **kwargs):
+        if 'message' in request.POST:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                user = request.user
+                message = form.cleaned_data['message']
+                product = Product.objects.get(pk=self.kwargs['pk'])
+                comment = Comment(user=user, message=message, product=product)
+                comment.save()
+            return redirect('store_app:product-detail', self.kwargs['pk'])
+        else:
+            if not request.user.is_authenticated:
+                return redirect('accounts_app:login')
             product = Product.objects.get(id=self.kwargs['pk'])
             if Cart.objects.filter(product=product, user=request.user).exists():
                 cart = Cart.objects.get(product=product, user=request.user)

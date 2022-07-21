@@ -316,11 +316,17 @@
                                                         افزودن نظر
                                                         <span>نظر خود را در مورد محصول مطرح نمایید</span>
                                                     </h2>
+                                                    {% if user.is_authenticated %}
                                                     <form method='post' action="" class="comment">
                                                         {% csrf_token %}
                                                         <textarea name='message' class="form-control" placeholder="نظر" rows="5"></textarea>
                                                         <button class="btn btn-default">ارسال نظر</button>
                                                     </form>
+                                                    {% else %}
+                                                        <p> برای ارسال نظر خود، لطفا وارد
+                                                            <a style='color:blue' href="{% url 'accounts_app:login' %}"> حساب کاربری </a>
+                                                              خود شوید. </p>
+                                                    {% endif %}
                                                 </article>
                                             </div>
                                         </div>

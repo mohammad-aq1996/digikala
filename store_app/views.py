@@ -88,7 +88,7 @@ class MobileDetailView(DetailView):
                 product = Product.objects.get(pk=self.kwargs['pk'])
                 comment = Comment(user=user, message=message, product=product)
                 comment.save()
-            return redirect('store_app:product-detail', self.kwargs['pk'])
+            return redirect('store_app:mobile-detail', self.kwargs['pk'])
         else:
             if not request.user.is_authenticated:
                 return redirect('accounts_app:login')
@@ -122,7 +122,7 @@ class LaptopDetailView(DetailView):
                 product = Product.objects.get(pk=self.kwargs['pk'])
                 comment = Comment(user=user, message=message, product=product)
                 comment.save()
-            return redirect('store_app:product-detail', self.kwargs['pk'])
+            return redirect('store_app:laptop-detail', self.kwargs['pk'])
         else:
             if not request.user.is_authenticated:
                 return redirect('accounts_app:login')

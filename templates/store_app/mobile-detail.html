@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="product-gallery default">
-                                        <img class="zoom-img" id="img-product-zoom" src="{{ mobile.image.url}}" data-zoom-image="{{ product.image.url }}" width="411" />
+                                        <img class="zoom-img" id="img-product-zoom" src="{{ mobile.image.url}}" data-zoom-image="{{ mobile.image.url }}" width="411" />
 
                                     </div>
                          
@@ -49,19 +49,19 @@
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="product-title default">
                                         <h1>
-                                            {{ product.persian_title }}
-                                            <span>{{ product.english_title }}</span></h1>
+                                            {{ mobile.persian_title }}
+                                            <span>{{ mobile.english_title }}</span></h1>
                                     </div>
                                     <div class="product-directory default">
                                         <ul>
                                             <li>
                                                 <span>برند</span> :
-                                                <span class="product-brand-title">{{ product.brand.title }}</span>
+                                                <span class="product-brand-title">{{ mobile.brand.title }}</span>
                                             </li>
                                             <li>
                                                 <span>دسته‌بندی</span> :
                                                 <a href="{% url 'store_app:product-list' 'phone' %}" class="btn-link-border">
-                                                    {{ product.category.title }}
+                                                    {{ mobile.category.title }}
                                                 </a>
                                             </li>
                                         </ul>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="price-product defualt">
                                         <div class="price-value">
-                                            <span> {{ product.price|intcomma }} </span>
+                                            <span> {{ mobile.price|intcomma }} </span>
                                             <span class="price-currency">تومان</span>
                                         </div>
                                         <div class="price-discount" data-title="تخفیف">
@@ -124,24 +124,24 @@
                                         <ul data-title="ویژگی‌های محصول">
                                             <li>
                                                 <span>حافظه داخلی: </span>
-                                                <span> {{ product.internal_storage }} گیگابایت </span>
+                                                <span> {{ mobile.internal_storage }} گیگابایت </span>
                                             </li>
                                             <li>
                                                 <span>شبکه های ارتباطی: </span>
-                                                <span> {{ product.networks }} </span>
+                                                <span> {{ mobile.networks }} </span>
                                             </li>
                                             <li>
                                                 <span>رزولوشن عکس: </span>
-                                                <span> {{ product.pic_resolution }} مگاپیکسل</span>
+                                                <span> {{ mobile.pic_resolution }} مگاپیکسل</span>
                                             </li>
                                             <li>
                                                 <span>تعداد سیم کارت: </span>
-                                                <span> {{ product.simcard_no }} </span>
+                                                <span> {{ mobile.simcard_no }} </span>
                                             </li>
                                             <li>
                                                 <span>ویژگی‌های خاص: </span>
                                                 <span> 
-                                                    {{ product.special_features }}
+                                                    {{ mobile.special_features }}
                                                 </span>
                                             </li>
                                         </ul>
@@ -185,9 +185,9 @@
                                                 <article>
                                                     <h2 class="param-title">
                                                         نقد و بررسی تخصصی
-                                                        <span>{{ product.persian_title }}</span>
+                                                        <span>{{ mobile.persian_title }}</span>
                                                     </h2>
-                                                    <p> {{ product.review }} </p>
+                                                    <p> {{ mobile.review }} </p>
 
                                                 </article>
                                             </div>
@@ -195,7 +195,7 @@
                                                 <article>
                                                     <h2 class="param-title">
                                                         مشخصات فنی
-                                                        <span>{{ product.english_title }}</span>
+                                                        <span>{{ mobile.english_title }}</span>
                                                     </h2>
                                                     <section>
                                                         <h3 class="params-title">مشخصات کلی</h3>
@@ -207,7 +207,7 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.weight }} گرم
+                                                                        {{ mobile.weight }} گرم
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -217,7 +217,7 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.special_features }}
+                                                                        {{ mobile.special_features }}
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -227,7 +227,7 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.simcard_no }}
+                                                                        {{ mobile.simcard_no }}
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -237,7 +237,7 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.chipset }}
+                                                                        {{ mobile.chipset }}
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -247,7 +247,7 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.chipset_type }} بیت
+                                                                        {{ mobile.chipset_type }} بیت
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -262,7 +262,7 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.chipset }}
+                                                                        {{ mobile.chipset }}
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -272,7 +272,7 @@
                                                                 </div>
                                                                 <div class="params-list-value">
                                                                     <span class="block">
-                                                                        {{ product.chipset_type }} بیت
+                                                                        {{ mobile.chipset_type }} بیت
                                                                     </span>
                                                                 </div>
                                                             </li>

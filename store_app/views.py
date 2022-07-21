@@ -13,18 +13,24 @@ from operator import attrgetter
 from django.db.models import Max, Min
 
 
-class ProductMixin:
-    model = ''
+class ProductListView(ListView):
+    model = Product
+    template_name = 'store_app/product-list.html'
     context_object_name = 'filter'
-    paginate_by = 1
+    paginate_by = 10
 
     def querystring(self):
         qs = self.request.GET.copy()
         qs.pop(self.page_kwarg, None)
         return qs.urlencode()
 
-    def get_queryset(self, qs):
-        return ProductFilter(self.request.GET, queryset=qs).qs
+    def get_queryset(self):
+        if self.kwargs['slug'] == 'phone':
+            qs = self.model.objects.filter(category__title='phone')
+            return ProductFilter(self.request.GET, queryset=qs).qs
+        elif self.kwargs['slug'] == 'laptop':
+            qs = self.model.objects.filter(category__title='laptop')
+            return ProductFilter(self.request.GET, queryset=qs).qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -34,20 +40,6 @@ class ProductMixin:
         context['max_price'] = max([product.price for product in self.model.objects.all()])
         context['brand'] = Brand.objects.all()
         return context
-
-
-class ProductListView(ProductMixin, ListView):
-    model = Product
-    template_name = 'store_app/product-list.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        if self.kwargs['slug'] == 'phone':
-            qs = self.model.objects.filter(category__title='phone')
-            return super().get_queryset(qs)
-        elif self.kwargs['slug'] == 'laptop':
-            qs = self.model.objects.filter(category__title='laptop')
-            return super().get_queryset(qs)
 
 
 class ProductSearchView(ListView):
@@ -77,9 +69,9 @@ class ProductSearchView(ListView):
         return context
 
 
-class ProductDetailView(DetailView):
+class MobileDetailView(DetailView):
     model = Product
-    template_name = 'store_app/single-product.html'
+    template_name = 'store_app/mobile-detail.html'
     context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
@@ -138,7 +130,4 @@ def remove_from_cart(request, pk):
     cart = Cart.objects.get(id=pk)
     cart.delete()
     return HttpResponseRedirect(reverse('store_app:cart'))
-
-
-
 

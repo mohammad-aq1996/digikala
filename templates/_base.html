@@ -322,7 +322,7 @@
                                     <span> تومان</span>
                                 </div>
                                 <a href="{% url 'store_app:cart' %}" class="basket-link">
-                                    <span>مشاهده سبد خرید</span>
+                                    {% if carts %}<span>مشاهده سبد خرید</span>{% endif %}
                                     <div class="basket-arrow"></div>
                                 </a>
                             </div>
@@ -347,7 +347,7 @@
                                 </li>
                                 {% endfor %}
                             </ul>
-                            <a href="{% url 'payment_app:shopping' %}" class="basket-submit">ثبت سفارش</a>
+                            <a href="{% url 'payment_app:shopping' %}" {% if not carts %}style="pointer-events: none" {% endif %} class="basket-submit">{% if not carts %} سبد خرید شما خالی است! {% else %} ثبت سفارش{% endif %}</a>
                             {% else %}
                             <a href="{% url 'accounts_app:login' %}" class="basket-submit">ابتدا وارد شوید</a>
                         {% endif %}

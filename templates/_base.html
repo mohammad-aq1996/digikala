@@ -327,6 +327,7 @@
                                 </a>
                             </div>
                             <ul class="basket-list">
+                                {% if carts %}
                                 {% for cart in carts %}
                                 <li>
                                         {% comment %} <button href="{% url 'store_app:remove_from_cart' cart.id %}" class="basket-item-remove"></button> {% endcomment %}
@@ -345,7 +346,7 @@
                                             </div>
                                         </div>
                                 </li>
-                                {% endfor %}
+                                {% endfor %}{% endif %}
                             </ul>
                             <a href="{% url 'payment_app:shopping' %}" {% if not carts %}style="pointer-events: none" {% endif %} class="basket-submit">{% if not carts %} سبد خرید شما خالی است! {% else %} ثبت سفارش{% endif %}</a>
                             {% else %}

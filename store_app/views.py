@@ -143,11 +143,11 @@ class CartListView(LoginRequiredMixin, ListView):
     context_object_name = 'carts'
 
     def get_queryset(self):
-        return Cart.objects.filter(user__username=self.request.user)
+        return Cart.objects.filter(user__email=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['totla_count'] = Cart.objects.filter(user__username=self.request.user).count()
+        context['totla_count'] = Cart.objects.filter(user__email=self.request.user).count()
         print(context)
         return context
 

@@ -157,7 +157,8 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.all()[:7]
+        context['mobiles'] = Product.objects.filter(category__title='phone')[:7]
+        context['laptops'] = Product.objects.filter(category__title='laptop')[:7]
         return context
 
 

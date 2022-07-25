@@ -73,6 +73,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, models.CASCADE, related_name='mobiles')
     category = models.ForeignKey(Category, models.CASCADE, related_name='mobiles')
     count = models.PositiveSmallIntegerField(default=2)
+    
 
     screen_size = models.CharField(max_length=10, default='15.6 اینچ', blank=True, null=True)
     usb_port_no = models.CharField(max_length=2, choices=PORT_NUMBER, default='3', blank=True, null=True)

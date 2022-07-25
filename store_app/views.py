@@ -13,7 +13,7 @@ class ProductListView(ListView):
     model = Product
     template_name = 'store_app/product-list.html'
     context_object_name = 'filter'
-    paginate_by = 10
+    paginate_by = 4
 
     def querystring(self):
         qs = self.request.GET.copy()
@@ -41,7 +41,7 @@ class ProductListView(ListView):
 class ProductSearchView(ListView):
     template_name = 'store_app/search.html'
     context_object_name = 'products'
-    paginate_by = 12
+    paginate_by = 4
 
     def querystring(self):
         qs = self.request.GET.copy()
@@ -59,8 +59,12 @@ class ProductSearchView(ListView):
         context['qr'] = self.request.GET.get("q")
         context['fltr'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
         context['ordr'] = self.request.GET
-        context['min_price'] = min([product.price for product in self.get_queryset()])
-        context['max_price'] = max([product.price for product in self.get_queryset()])
+        try:
+            context['min_price'] = min([product.price for product in self.get_queryset()])
+            context['max_price'] = max([product.price for product in self.get_queryset()])
+        except:
+            context['min_price'] = 0
+            context['max_price'] = 0
         context['brand'] = Brand.objects.all()
         return context
 

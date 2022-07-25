@@ -13,24 +13,95 @@
                     <aside class="sidebar-page col-12 col-sm-12 col-md-4 col-lg-3 order-1">
                         <form method="get" action="{% url 'store_app:product-search' %}">
                             <input type='hidden' name='q' value="{{qr}}">
-                            <div class="box">
-                                <div class="box-header">
+                            {% comment %} <div class="box">
+                                 <div class="box-header">
                                     <div class="box-toggle" data-toggle="collapse" href="#collapseExample1" role="button"
                                         aria-expanded="true" aria-controls="collapseExample1">
                                         محدوده قیمت
                                         <i class="now-ui-icons arrows-1_minimal-down"></i>
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="box-content">
                                     <div class="collapse show" id="collapseExample1">
                                         <div style="text-align:center;" class="filter-option">
                                             
                                             <p><label>از</label>
-                                            <input type='number' name='price_gt' min={{min_price}} max={{max_price}} value={{min_price}}
+                                            <input type='number' name='price_gte' min={{min_price}} max={{max_price}} value={{min_price}}
                                                 style="text-align:center;width: 50%;padding: 6px 10px;margin: 8px 0;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;"> تومان </p>
                                             <p><label >تا</label>
-                                            <input type='number' name='price_lt' min={{min_price}} max={{max_price}} value={{max_price}}
+                                            <input type='number' name='price_lte' min={{min_price}} max={{max_price}} value={{max_price}}
                                                 style="text-align:center;width: 50%;padding: 6px 10px;margin: 8px 0;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;"> تومان </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> {% endcomment %}
+                            <div class="box">
+                                <div class="box-header">
+                                    <div class="box-toggle" data-toggle="collapse" href="#collapseExample2" role="button"
+                                        aria-expanded="true" aria-controls="collapseExample2">
+                                        برند
+                                        <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                    </div>
+                                </div>
+                                <div class="box-content">
+                                    <div class="collapse show" id="collapseExample2">
+                                       
+                                        <div class="filter-option">
+                                            {% for b in brand %}
+                                            {% with b.pk|stringformat:'s' as z %}
+                                                <div class="checkbox">
+                                                    <input name="brand" id="{{b.pk}}" value={{b.pk}} type="checkbox" {% if "brand="|add:z in request.get_full_path %}checked{% endif %}>
+                                                    <label for="{{b.pk}}">
+                                                        {{b.title}}
+                                                    </label>
+                                                </div>
+                                                {% endwith %}
+                                            {% endfor %}
+
+                                            
+                                            {% comment %} <div class="checkbox">
+                                                <input name="brand" value=5 id="checkbox8" type="checkbox" {% if 'brand=5' in request.get_full_path %}checked{% endif %}>
+                                                <label for="checkbox8">
+                                                    اپل
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input id="checkbox9" type="checkbox" {% if 'brand=2' in request.get_full_path %}checked{% endif %}>
+                                                <label for="checkbox9">
+                                                    سامسونگ
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input name="brand" value=3 id="checkbox10" type="checkbox" {% if 'brand=3' in request.get_full_path %}checked{% endif %}>
+                                                <label for="checkbox10">
+                                                    شیاپومی
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input id="checkbox11" type="checkbox">
+                                                <label for="checkbox11">
+                                                    نوکیا
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input id="checkbox12" type="checkbox">
+                                                <label for="checkbox12">
+                                                    هواوی
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input id="checkbox13" type="checkbox">
+                                                <label for="checkbox13">
+                                                    اچ تی سی
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input id="checkbox14" type="checkbox">
+                                                <label for="checkbox14">
+                                                    فراری
+                                                </label>
+                                            </div> {% endcomment %}
 
                                         </div>
                                     </div>

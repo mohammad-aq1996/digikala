@@ -24,8 +24,9 @@ class ShoppingView(TemplateView):
 
 def payment_compelete_view(request):
     cart = Cart.objects.filter(user=request.user.id)
+    price = sum([int(c.product.price)*int(c.quantity) for c in Cart.objects.filter(user__email=request.user)])
     cart.delete()
-    return render(request, 'payment_app/shopping-complete-buy.html')
+    return render(request, 'payment_app/shopping-complete-buy.html', {'price':price})
 
 
 def payment_no_compelete_view(request):

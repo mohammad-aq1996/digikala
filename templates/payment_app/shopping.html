@@ -199,7 +199,7 @@
                                         <span class="checkout-summary-price-value-amount">{{total_price|intcomma}}</span> تومان
                                     </div>
 
-                                {% if user.address and user.phone and user.post_id and user.receiver_name %}
+                                {% if user.receiver_name or user.last_name and user.address and user.phone and user.post_id  %}
                                     <a href="{% url 'payment_app:shopping-payment' %}" class="selenium-next-step-shipping">
                                         <div class="parent-btn">
                                             <button class="dk-btn dk-btn-info">

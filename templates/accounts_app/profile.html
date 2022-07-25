@@ -97,10 +97,11 @@
                                     {% for cart in carts %}
                                     <div class="col-md-6 col-sm-12">
                                         <div class="profile-recent-fav-row">
-                                            <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
+                                            <a href="{% if cart.product.category.title == 'phone' %}{% url 'store_app:mobile-detail' cart.product.pk %}{% elif cart.product.category.title == 'laptop' %}{% url 'store_app:laptop-detail' cart.product.pk %}{% endif %}" 
+                                            class="profile-recent-fav-col profile-recent-fav-col-thumb">
                                                 <img src="{{ cart.product.image.url }}"></a>
                                             <div class="profile-recent-fav-col profile-recent-fav-col-title">
-                                                <a href="#">
+                                                <a href="{% if cart.product.category.title == 'phone' %}{% url 'store_app:mobile-detail' cart.product.pk %}{% elif cart.product.category.title == 'laptop' %}{% url 'store_app:laptop-detail' cart.product.pk %}{% endif %}">
                                                     <h4 class="profile-recent-fav-name">
                                                         {{ cart.product.persian_title }}
                                                     </h4>
@@ -114,7 +115,7 @@
                                                 </button></a>
                                             </div>
                                             <div class="col-12 text-left mb-3">
-                                                <a href="{{cart.product.get_absolute_url}}" class="view-product">مشاهده محصول</a>
+                                                <a href="{% if cart.product.category.title == 'phone' %}{% url 'store_app:mobile-detail' cart.product.pk %}{% elif cart.product.category.title == 'laptop' %}{% url 'store_app:laptop-detail' cart.product.pk %}{% endif %}" class="view-product">مشاهده محصول</a>
                                             </div>
                                         </div>
                                     </div>

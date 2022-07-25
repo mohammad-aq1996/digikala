@@ -135,7 +135,12 @@
                                         <span>فروشگاه اینترنتی دیجی کالا</span>
                                     </a>
                                 </li>
-                                <li><span>جستجوی موبایل</span></li>
+                                <li><span>کالای دیجیتال</span></li>
+                                {% if 'phone' in request.get_full_path %}
+                                <li><span> موبایل</span></li>
+                                {% else %}
+                                <li><span> لپ تاپ </span></li>
+                                {% endif %}
                             </ul>
                         </div>
                         <div class="listing default">

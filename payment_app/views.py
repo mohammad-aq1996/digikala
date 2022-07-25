@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
 from store_app.models import Cart
-from django.db.models.aggregates import Count
-from django.db.models import F
+
 
 class ShoppingPaymentView(ListView):
     model = Cart

@@ -1,16 +1,12 @@
-from django.views.generic import ListView, DetailView, CreateView, TemplateView
-from django.shortcuts import redirect, render
-from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, TemplateView
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Brand, Category, Product, Comment, Cart, Product
+from .models import Brand, Product, Comment, Cart, Product
 from .forms import CommentForm
 from .filters import ProductFilter
-from itertools import chain
-import operator
-from operator import attrgetter
-from django.db.models import Max, Min
 
 
 class ProductListView(ListView):

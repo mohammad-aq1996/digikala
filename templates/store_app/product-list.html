@@ -11,7 +11,7 @@
 
 {% block content %}
         <!-- main -->
-        <main class="search-page default">
+       <main class="search-page default">
             <div class="container">
                 <div class="row">
                     <aside class="sidebar-page col-12 col-sm-12 col-md-4 col-lg-3 order-1">
@@ -51,7 +51,7 @@
                                     <div class="collapse show" id="collapseExample2">
                                        
                                         <div class="filter-option">
-                                            {% for b in brand %}
+                                            {% comment %} {% for b in brand %}
                                             {% with b.pk|stringformat:'s' as z %}
                                                 <div class="checkbox">
                                                     <input name="brand" id="{{b.pk}}" value={{b.pk}} type="checkbox" {% if "brand="|add:z in request.get_full_path %}checked{% endif %}>
@@ -60,17 +60,31 @@
                                                     </label>
                                                 </div>
                                                 {% endwith %}
-                                            {% endfor %}
+                                            {% endfor %} {% endcomment %}
 
                                             
-                                            {% comment %} <div class="checkbox">
-                                                <input name="brand" value=5 id="checkbox8" type="checkbox" {% if 'brand=5' in request.get_full_path %}checked{% endif %}>
+                                            <div class="checkbox">
+                                                <input name="brand" value=1 id="checkbox8" type="checkbox" {% if 'brand=1' in request.get_full_path %}checked{% endif %}>
                                                 <label for="checkbox8">
                                                     اپل
                                                 </label>
                                             </div>
+                                            {% if 'laptop' in request.get_full_path %}
                                             <div class="checkbox">
-                                                <input id="checkbox9" type="checkbox" {% if 'brand=2' in request.get_full_path %}checked{% endif %}>
+                                                <input name="brand" value=4 id="checkbox9" type="checkbox" {% if 'brand=4' in request.get_full_path %}checked{% endif %}>
+                                                <label for="checkbox9">
+                                                    ایسوس
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input name="brand" value=5 id="checkbox10" type="checkbox" {% if 'brand=5' in request.get_full_path %}checked{% endif %}>
+                                                <label for="checkbox10">
+                                                    لنوو
+                                                </label>
+                                            </div>
+                                            {% else %}
+                                            <div class="checkbox">
+                                                <input name="brand" value=2 id="checkbox9" type="checkbox" {% if 'brand=2' in request.get_full_path %}checked{% endif %}>
                                                 <label for="checkbox9">
                                                     سامسونگ
                                                 </label>
@@ -78,34 +92,10 @@
                                             <div class="checkbox">
                                                 <input name="brand" value=3 id="checkbox10" type="checkbox" {% if 'brand=3' in request.get_full_path %}checked{% endif %}>
                                                 <label for="checkbox10">
-                                                    شیاپومی
+                                                    شیائومی
                                                 </label>
                                             </div>
-                                            <div class="checkbox">
-                                                <input id="checkbox11" type="checkbox">
-                                                <label for="checkbox11">
-                                                    نوکیا
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="checkbox12" type="checkbox">
-                                                <label for="checkbox12">
-                                                    هواوی
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="checkbox13" type="checkbox">
-                                                <label for="checkbox13">
-                                                    اچ تی سی
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="checkbox14" type="checkbox">
-                                                <label for="checkbox14">
-                                                    فراری
-                                                </label>
-                                            </div> {% endcomment %}
-
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

@@ -218,10 +218,14 @@
                                                         <div class="product-box-row product-box-row-price">
                                                             <div class="price">
                                                                 <div class="price-value">
-                                                                    <div class="price-value-wrapper">
+                                                                    <div class="price-value-wrapper">{% if product.count %}
                                                                         {{ product.price|intcomma }} <span
-                                                                            class="price-currency">تومان</span>
-                                                                    </div>
+                                                                            class="price-currency">تومان
+                                                                        {% else %}
+                                                                        ناموجود
+                                                                        </span>
+                                                                            {% endif %}
+                                                                        </div>
                                                                 </div>
                                                             </div>
                                                         </div>

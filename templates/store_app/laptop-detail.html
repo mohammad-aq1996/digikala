@@ -91,6 +91,7 @@
                                             <a href="#" class="btn-link-border">دیجی کالا</a>
                                         </p>
                                     </div>
+                                    {% if laptop.count %}
                                     <div class="price-product defualt">
                                         <div class="price-value">
                                             <span> {{ laptop.price|intcomma }} </span>
@@ -113,7 +114,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </form>{% else %} <h2> ناموجود </h2>{% endif %}
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 center-breakpoint">
                                     

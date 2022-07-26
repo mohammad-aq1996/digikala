@@ -34,7 +34,7 @@ class ProductFilter(django_filters.FilterSet):
         return queryset.order_by(expression)
 
     def filter_by_available(self, queryset, name, value):
-        if value == False:
+        if value == True:
             return queryset.filter(count__gt=0)
         else:
             return queryset

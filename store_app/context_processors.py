@@ -1,7 +1,6 @@
 from .models import Cart
 
 
-
 def cart_context(request):
     context = {
         

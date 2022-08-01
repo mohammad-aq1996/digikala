@@ -1,8 +1,8 @@
-accounts_app/migrations
-payment_app/migrations
-store_app/migrations
-accounts_app/__pycache__/
-store_app/__pycache__/
-payment_app/__pycache__/
-digikala/__pycache__
+digikala/accounts_app/migrations
+digikala/payment_app/migrations
+digikala/store_app/migrations
+digikala/accounts_app/__pycache__/
+digikala/store_app/__pycache__/
+digikala/payment_app/__pycache__/
+digikala/digikala/__pycache__
 db.sqlite3

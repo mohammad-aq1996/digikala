@@ -7,6 +7,7 @@ COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 COPY . /code/
 
-CMD python digikala/manage.py makemigrations --noinput && \
+CMD sleep 10 && \
+    python digikala/manage.py makemigrations --noinput && \
     python digikala/manage.py migrate  --noinput && \
     python digikala/manage.py runserver 0.0.0.0:8000
